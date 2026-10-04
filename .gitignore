@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+data/synthea_raw/
+data/*/raw_wearables/
+data/*/truth/
+data/full/
+synthea/*.jar
+*.log
+data/synthea_log.txt

@@ -1,0 +1,76 @@
+{
+ "profile": "sample",
+ "n_patients": 50,
+ "n_rows": 31997,
+ "horizon_min": 60,
+ "paired_tests": {
+  "Wearable-only -> Fused (snapshot EHR only)": {
+   "mean_MAE_gain": 0.5674592369012875,
+   "pct_patients_improved": 70.0,
+   "wilcoxon_p": 0.0002409992117797799
+  },
+  "Fused (snapshot EHR only) -> Fully fused": {
+   "mean_MAE_gain": -0.023540835038946994,
+   "pct_patients_improved": 48.0,
+   "wilcoxon_p": 0.5655778099255286
+  },
+  "Wearable-only -> Fully fused": {
+   "mean_MAE_gain": 0.5439184018623405,
+   "pct_patients_improved": 82.0,
+   "wilcoxon_p": 0.0002308749851795966
+  }
+ },
+ "top_features": {
+  "Wearable-only": {
+   "min_since_logged_meal": 31362.389283180237,
+   "glucose_lag30": 22887.40118098259,
+   "tod_cos": 19922.53313112259,
+   "tod_sin": 15950.98780298233,
+   "hrv_rmssd_latest": 13495.339623689651,
+   "glucose": 12997.515415906906,
+   "sleep_hours_last_night": 11431.276141643524,
+   "glucose_mean60": 11019.17435669899,
+   "wrist_temp_dev": 10860.582427978516,
+   "glucose_roc30": 10371.398857355118,
+   "rhr_trend_7d": 9918.28135919571,
+   "glucose_std60": 9735.872141838074,
+   "glucose_lag60": 9324.353749513626,
+   "carbs_logged_3h": 9307.386505842209,
+   "glucose_roc15": 9222.284837722778
+  },
+  "Fused (snapshot EHR only)": {
+   "min_since_logged_meal": 34530.22347784042,
+   "glucose_lag30": 22977.078793525696,
+   "tod_cos": 22224.267223596573,
+   "glucose": 17190.70951795578,
+   "hba1c": 17100.19447183609,
+   "fasting_glucose": 16553.572664260864,
+   "glucose_mean60": 15913.855237007141,
+   "tod_sin": 13483.203084230423,
+   "carbs_logged_3h": 11268.75760602951,
+   "glucose_lag60": 11115.43795633316,
+   "glucose_roc30": 10467.678956508636,
+   "egfr": 9826.940002918243,
+   "glucose_roc15": 8737.519410133362,
+   "alt": 8146.536870479584,
+   "glucose_lag15": 8036.506628036499
+  },
+  "Fully fused": {
+   "min_since_logged_meal": 35489.467182159424,
+   "tod_cos": 22630.498858451843,
+   "glucose_lag30": 21600.138809919357,
+   "glucose_mean60": 17820.900981903076,
+   "glucose": 17341.235649585724,
+   "tod_sin": 14926.765092849731,
+   "hba1c": 13612.987928390503,
+   "carbs_logged_3h": 10914.220445632935,
+   "glucose_lag60": 10719.678965091705,
+   "fasting_glucose": 10589.798992156982,
+   "glucose_roc30": 10581.510355949402,
+   "glucose_roc15": 8003.957401275635,
+   "glucose_lag15": 7660.561511039734,
+   "years_since_dx": 7575.099278926849,
+   "egfr": 7316.170436859131
+  }
+ }
+}

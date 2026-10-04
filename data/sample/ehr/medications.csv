@@ -1,0 +1,118 @@
+patient_id,medication,class,start_date,dose,status
+3fab2315-535f-c163-6712-e5b3585fd3f8,Metformin,metformin,2022-07-02,2000 mg/day,active
+3fab2315-535f-c163-6712-e5b3585fd3f8,Glimepiride,sulfonylurea,2025-11-30,2 mg/day,active
+3fab2315-535f-c163-6712-e5b3585fd3f8,Atorvastatin,statin,2025-10-04,10 mg/day,active
+3fab2315-535f-c163-6712-e5b3585fd3f8,Losartan,ACE inhibitor / ARB,2023-11-12,40 mg/day,active
+01ee9e96-5701-e5d2-ad5b-bbd2032c1d13,Metformin,metformin,2021-10-30,2000 mg/day,active
+01ee9e96-5701-e5d2-ad5b-bbd2032c1d13,Empagliflozin,SGLT2 inhibitor,2026-01-27,10 mg/day,active
+01ee9e96-5701-e5d2-ad5b-bbd2032c1d13,Insulin glargine,insulin (basal),2025-03-28,31 U/day,active
+01ee9e96-5701-e5d2-ad5b-bbd2032c1d13,Insulin lispro,insulin (bolus),2021-04-11,5 U/meal,active
+01ee9e96-5701-e5d2-ad5b-bbd2032c1d13,Atorvastatin,statin,2025-12-18,20 mg/day,active
+01ee9e96-5701-e5d2-ad5b-bbd2032c1d13,Lisinopril,ACE inhibitor / ARB,2024-07-25,20 mg/day,active
+3a738417-6d7e-6b44-d09c-023fab36d499,Metformin,metformin,2025-11-30,500 mg/day,active
+3a738417-6d7e-6b44-d09c-023fab36d499,Empagliflozin,SGLT2 inhibitor,2022-08-19,10 mg/day,active
+3a738417-6d7e-6b44-d09c-023fab36d499,Atorvastatin,statin,2022-05-27,40 mg/day,active
+3a738417-6d7e-6b44-d09c-023fab36d499,Lisinopril,ACE inhibitor / ARB,2025-04-28,20 mg/day,active
+9d361982-b058-0cea-4715-a66fa5d38e99,Metformin,metformin,2024-02-12,500 mg/day,active
+9d361982-b058-0cea-4715-a66fa5d38e99,Atorvastatin,statin,2024-02-12,10 mg/day,active
+9d361982-b058-0cea-4715-a66fa5d38e99,Lisinopril,ACE inhibitor / ARB,2024-02-12,10 mg/day,active
+227c0989-b799-e589-2aee-a1ae0bc18651,Metformin,metformin,2024-04-14,500 mg/day,active
+227c0989-b799-e589-2aee-a1ae0bc18651,Empagliflozin,SGLT2 inhibitor,2021-09-03,10 mg/day,active
+227c0989-b799-e589-2aee-a1ae0bc18651,Sitagliptin,DPP-4 inhibitor,2025-11-12,100 mg/day,active
+227c0989-b799-e589-2aee-a1ae0bc18651,Glimepiride,sulfonylurea,2025-07-22,1 mg/day,active
+227c0989-b799-e589-2aee-a1ae0bc18651,Insulin glargine,insulin (basal),2021-07-26,27 U/day,active
+227c0989-b799-e589-2aee-a1ae0bc18651,Insulin lispro,insulin (bolus),2025-07-06,9 U/meal,active
+227c0989-b799-e589-2aee-a1ae0bc18651,Atorvastatin,statin,2022-09-05,10 mg/day,active
+227c0989-b799-e589-2aee-a1ae0bc18651,Losartan,ACE inhibitor / ARB,2025-01-23,10 mg/day,active
+7b95b9d0-664b-20c8-b97b-51e24e73bf7d,Metformin,metformin,2026-06-30,1000 mg/day,stopped
+7b95b9d0-664b-20c8-b97b-51e24e73bf7d,Insulin glargine,insulin (basal),2023-02-15,33 U/day,active
+7b95b9d0-664b-20c8-b97b-51e24e73bf7d,Atorvastatin,statin,2025-06-11,10 mg/day,active
+790ad9a1-6f64-c89b-9b99-964b918c40eb,Metformin,metformin,2024-02-18,2000 mg/day,active
+790ad9a1-6f64-c89b-9b99-964b918c40eb,Atorvastatin,statin,2023-11-30,40 mg/day,active
+790ad9a1-6f64-c89b-9b99-964b918c40eb,Losartan,ACE inhibitor / ARB,2022-09-26,20 mg/day,active
+e69609d3-9285-d325-9284-96d60f750d10,Metformin,metformin,2024-12-20,2000 mg/day,active
+e69609d3-9285-d325-9284-96d60f750d10,Empagliflozin,SGLT2 inhibitor,2024-09-29,10 mg/day,active
+e69609d3-9285-d325-9284-96d60f750d10,Atorvastatin,statin,2023-01-06,20 mg/day,active
+e69609d3-9285-d325-9284-96d60f750d10,Losartan,ACE inhibitor / ARB,2022-05-11,20 mg/day,active
+6bb9f6e8-d0c7-3e0d-579f-57da9f1f3515,Metformin,metformin,2021-06-04,2000 mg/day,active
+6bb9f6e8-d0c7-3e0d-579f-57da9f1f3515,Glimepiride,sulfonylurea,2021-07-15,2 mg/day,active
+6bb9f6e8-d0c7-3e0d-579f-57da9f1f3515,Atorvastatin,statin,2021-07-12,80 mg/day,active
+6bb9f6e8-d0c7-3e0d-579f-57da9f1f3515,Lisinopril,ACE inhibitor / ARB,2023-09-25,10 mg/day,active
+3b24d024-a466-fe09-4049-d78883436802,Metformin,metformin,2026-04-12,2000 mg/day,active
+3b24d024-a466-fe09-4049-d78883436802,Empagliflozin,SGLT2 inhibitor,2024-03-18,10 mg/day,active
+3b24d024-a466-fe09-4049-d78883436802,Sitagliptin,DPP-4 inhibitor,2023-03-01,100 mg/day,active
+3b24d024-a466-fe09-4049-d78883436802,Insulin glargine,insulin (basal),2024-12-11,32 U/day,active
+3b24d024-a466-fe09-4049-d78883436802,Insulin lispro,insulin (bolus),2024-08-26,5 U/meal,active
+3b24d024-a466-fe09-4049-d78883436802,Atorvastatin,statin,2022-03-07,80 mg/day,active
+3b24d024-a466-fe09-4049-d78883436802,Losartan,ACE inhibitor / ARB,2025-05-01,10 mg/day,active
+b73f5258-fd49-ce9b-1b83-93472e985397,Metformin,metformin,2021-02-15,500 mg/day,active
+b73f5258-fd49-ce9b-1b83-93472e985397,Empagliflozin,SGLT2 inhibitor,2025-02-08,10 mg/day,active
+b73f5258-fd49-ce9b-1b83-93472e985397,Insulin glargine,insulin (basal),2022-06-18,16 U/day,active
+b73f5258-fd49-ce9b-1b83-93472e985397,Insulin lispro,insulin (bolus),2020-12-05,7 U/meal,active
+b73f5258-fd49-ce9b-1b83-93472e985397,Atorvastatin,statin,2025-05-27,20 mg/day,active
+b73f5258-fd49-ce9b-1b83-93472e985397,Losartan,ACE inhibitor / ARB,2022-01-23,10 mg/day,active
+d3727ff2-5d7b-347f-d78c-edc4323cf890,Metformin,metformin,2024-01-12,1000 mg/day,active
+d3727ff2-5d7b-347f-d78c-edc4323cf890,Atorvastatin,statin,2024-01-12,20 mg/day,active
+d3727ff2-5d7b-347f-d78c-edc4323cf890,Lisinopril,ACE inhibitor / ARB,2024-01-12,10 mg/day,active
+8d597bb2-5d4b-8ffc-7985-7e6586fa926b,Metformin,metformin,2024-12-26,1500 mg/day,active
+8d597bb2-5d4b-8ffc-7985-7e6586fa926b,Glimepiride,sulfonylurea,2021-01-09,4 mg/day,active
+8d597bb2-5d4b-8ffc-7985-7e6586fa926b,Insulin glargine,insulin (basal),2023-04-28,18 U/day,active
+8d597bb2-5d4b-8ffc-7985-7e6586fa926b,Insulin lispro,insulin (bolus),2025-12-05,4 U/meal,active
+8d597bb2-5d4b-8ffc-7985-7e6586fa926b,Atorvastatin,statin,2021-04-25,80 mg/day,active
+2cc6efe0-8e4a-8ccd-8e89-15aab675835f,Metformin,metformin,2022-10-12,1500 mg/day,active
+2cc6efe0-8e4a-8ccd-8e89-15aab675835f,Atorvastatin,statin,2025-11-21,20 mg/day,active
+0832d9ad-468a-2b63-53be-b5bc9fc8273b,Metformin,metformin,2021-02-17,500 mg/day,active
+0832d9ad-468a-2b63-53be-b5bc9fc8273b,Glimepiride,sulfonylurea,2022-04-20,2 mg/day,active
+0832d9ad-468a-2b63-53be-b5bc9fc8273b,Insulin glargine,insulin (basal),2025-09-20,12 U/day,active
+0832d9ad-468a-2b63-53be-b5bc9fc8273b,Insulin lispro,insulin (bolus),2021-10-02,8 U/meal,active
+0832d9ad-468a-2b63-53be-b5bc9fc8273b,Losartan,ACE inhibitor / ARB,2021-05-16,20 mg/day,active
+b6d46abe-b2e1-5302-e494-a09a93ce5434,Metformin,metformin,2024-04-18,1500 mg/day,active
+b6d46abe-b2e1-5302-e494-a09a93ce5434,Insulin glargine,insulin (basal),2023-09-16,12 U/day,active
+b6d46abe-b2e1-5302-e494-a09a93ce5434,Insulin lispro,insulin (bolus),2025-03-04,5 U/meal,active
+b6d46abe-b2e1-5302-e494-a09a93ce5434,Atorvastatin,statin,2025-09-19,80 mg/day,active
+b6d46abe-b2e1-5302-e494-a09a93ce5434,Lisinopril,ACE inhibitor / ARB,2023-04-18,20 mg/day,active
+0c54a3a6-619a-c0d1-d715-0441e398c818,Metformin,metformin,2025-04-20,2000 mg/day,active
+0c54a3a6-619a-c0d1-d715-0441e398c818,Sitagliptin,DPP-4 inhibitor,2025-04-03,100 mg/day,active
+0c54a3a6-619a-c0d1-d715-0441e398c818,Atorvastatin,statin,2026-07-31,20 mg/day,active
+0c54a3a6-619a-c0d1-d715-0441e398c818,Lisinopril,ACE inhibitor / ARB,2025-04-03,10 mg/day,active
+e7af4ed9-1970-c4e9-adb0-895b0d6507b0,Metformin,metformin,2022-05-04,2000 mg/day,active
+e7af4ed9-1970-c4e9-adb0-895b0d6507b0,Insulin glargine,insulin (basal),2022-08-30,29 U/day,active
+e7af4ed9-1970-c4e9-adb0-895b0d6507b0,Atorvastatin,statin,2024-08-12,40 mg/day,active
+e7af4ed9-1970-c4e9-adb0-895b0d6507b0,Lisinopril,ACE inhibitor / ARB,2021-09-18,10 mg/day,active
+cdf9f16d-82c4-f446-c865-0835069b1db9,Metformin,metformin,2023-06-18,2000 mg/day,active
+cdf9f16d-82c4-f446-c865-0835069b1db9,Atorvastatin,statin,2026-03-07,20 mg/day,active
+cdf9f16d-82c4-f446-c865-0835069b1db9,Lisinopril,ACE inhibitor / ARB,2024-02-21,20 mg/day,active
+a296a2ba-b1ad-a3c5-d172-aa3dfdbcdab9,Metformin,metformin,2025-06-13,500 mg/day,active
+a296a2ba-b1ad-a3c5-d172-aa3dfdbcdab9,Insulin glargine,insulin (basal),2022-12-12,13 U/day,active
+a296a2ba-b1ad-a3c5-d172-aa3dfdbcdab9,Atorvastatin,statin,2021-07-15,40 mg/day,active
+6de3fef5-24fc-b99d-09b3-cb149aee3178,Atorvastatin,statin,2021-12-12,10 mg/day,active
+6de3fef5-24fc-b99d-09b3-cb149aee3178,Losartan,ACE inhibitor / ARB,2023-10-02,20 mg/day,active
+c9734be7-92c0-97f5-02d1-0cceac3653f0,Lisinopril,ACE inhibitor / ARB,2023-02-23,40 mg/day,active
+97d6f36f-af43-2207-4e60-18684490434d,Atorvastatin,statin,2022-03-14,20 mg/day,active
+97d6f36f-af43-2207-4e60-18684490434d,Losartan,ACE inhibitor / ARB,2021-12-20,10 mg/day,active
+fdd3d5e1-4161-1586-2ab6-b7a411d22da5,Metformin,metformin,2022-04-19,500 mg/day,active
+1f720def-1bd4-df8f-b3cb-15d207ab121d,Metformin,metformin,2021-05-14,500 mg/day,active
+1f720def-1bd4-df8f-b3cb-15d207ab121d,Lisinopril,ACE inhibitor / ARB,2023-01-26,20 mg/day,active
+aaf11fe2-9654-5eac-e9f2-8ae39a992d92,Atorvastatin,statin,2021-06-02,20 mg/day,active
+aaf11fe2-9654-5eac-e9f2-8ae39a992d92,Losartan,ACE inhibitor / ARB,2025-04-13,40 mg/day,active
+ad27f9cb-0e01-7165-32e1-7c652d095bd3,Metformin,metformin,2022-02-15,500 mg/day,active
+ad27f9cb-0e01-7165-32e1-7c652d095bd3,Atorvastatin,statin,2022-10-20,80 mg/day,active
+ad27f9cb-0e01-7165-32e1-7c652d095bd3,Losartan,ACE inhibitor / ARB,2022-08-18,20 mg/day,active
+48bb6fe9-2445-f79f-0bad-d6e62f35bfc3,Metformin,metformin,2021-08-14,500 mg/day,active
+48bb6fe9-2445-f79f-0bad-d6e62f35bfc3,Atorvastatin,statin,2020-12-23,10 mg/day,active
+902020e2-73d7-b0ab-51f5-07137486340f,Atorvastatin,statin,2022-02-17,40 mg/day,active
+902020e2-73d7-b0ab-51f5-07137486340f,Losartan,ACE inhibitor / ARB,2023-04-28,10 mg/day,active
+da91f118-cccd-72cb-178b-3460b5201f67,Losartan,ACE inhibitor / ARB,2024-12-08,10 mg/day,active
+7cfe5946-e9b8-fda6-bf6a-2845cacff3f9,Atorvastatin,statin,2024-10-30,80 mg/day,active
+7cfe5946-e9b8-fda6-bf6a-2845cacff3f9,Lisinopril,ACE inhibitor / ARB,2024-10-30,20 mg/day,active
+722e6372-21a7-ddca-6688-1a18547a1c48,Atorvastatin,statin,2024-10-30,10 mg/day,active
+722e6372-21a7-ddca-6688-1a18547a1c48,Losartan,ACE inhibitor / ARB,2024-10-30,10 mg/day,active
+b4e555f9-d758-7e8e-8759-345008373b54,Lisinopril,ACE inhibitor / ARB,2024-10-30,10 mg/day,active
+84417c0d-0db8-dc7c-4a7d-f80a70b0d7e7,Losartan,ACE inhibitor / ARB,2024-10-30,20 mg/day,active
+70aef97e-45c9-e0ce-5008-958703676d05,Atorvastatin,statin,2024-10-30,10 mg/day,active
+70aef97e-45c9-e0ce-5008-958703676d05,Lisinopril,ACE inhibitor / ARB,2024-10-30,20 mg/day,active
+6e174f7c-e6cd-b643-936e-1f157379f378,Atorvastatin,statin,2024-10-30,40 mg/day,active
+6e174f7c-e6cd-b643-936e-1f157379f378,Lisinopril,ACE inhibitor / ARB,2024-10-30,40 mg/day,active
+ee3b68cf-7893-8be0-95be-64545da3c021,Atorvastatin,statin,2024-10-30,40 mg/day,active
+72c05512-5529-1450-7245-3dddb25874ef,Atorvastatin,statin,2025-10-22,10 mg/day,active
+72c05512-5529-1450-7245-3dddb25874ef,Losartan,ACE inhibitor / ARB,2024-10-30,10 mg/day,active

@@ -1,0 +1,144 @@
+patient_id,condition,onset_date,status
+3fab2315-535f-c163-6712-e5b3585fd3f8,Type 2 diabetes,2015-06-15,active
+3fab2315-535f-c163-6712-e5b3585fd3f8,Prediabetes,2003-06-02,resolved
+3fab2315-535f-c163-6712-e5b3585fd3f8,Hypertension,2015-06-15,active
+01ee9e96-5701-e5d2-ad5b-bbd2032c1d13,Type 2 diabetes,2020-02-23,active
+01ee9e96-5701-e5d2-ad5b-bbd2032c1d13,Prediabetes,1976-01-11,resolved
+01ee9e96-5701-e5d2-ad5b-bbd2032c1d13,Hypertension,2013-01-13,active
+01ee9e96-5701-e5d2-ad5b-bbd2032c1d13,Dyslipidemia,2025-06-17,active
+01ee9e96-5701-e5d2-ad5b-bbd2032c1d13,Obesity,2020-07-06,active
+01ee9e96-5701-e5d2-ad5b-bbd2032c1d13,Coronary artery disease,2018-02-11,active
+01ee9e96-5701-e5d2-ad5b-bbd2032c1d13,Chronic kidney disease (stage 3),2024-01-12,active
+3a738417-6d7e-6b44-d09c-023fab36d499,Type 2 diabetes,2022-05-27,active
+3a738417-6d7e-6b44-d09c-023fab36d499,Prediabetes,2015-04-17,resolved
+3a738417-6d7e-6b44-d09c-023fab36d499,Hypertension,2023-06-02,active
+3a738417-6d7e-6b44-d09c-023fab36d499,Dyslipidemia,2020-08-01,active
+3a738417-6d7e-6b44-d09c-023fab36d499,Obesity,2025-02-16,active
+9d361982-b058-0cea-4715-a66fa5d38e99,Type 2 diabetes,2024-02-12,active
+9d361982-b058-0cea-4715-a66fa5d38e99,Prediabetes,1996-02-19,resolved
+9d361982-b058-0cea-4715-a66fa5d38e99,Hypertension,2022-01-31,active
+9d361982-b058-0cea-4715-a66fa5d38e99,Obesity,2023-05-07,active
+227c0989-b799-e589-2aee-a1ae0bc18651,Type 2 diabetes,2015-04-07,active
+227c0989-b799-e589-2aee-a1ae0bc18651,Prediabetes,1983-05-17,resolved
+227c0989-b799-e589-2aee-a1ae0bc18651,Hypertension,2016-04-12,active
+227c0989-b799-e589-2aee-a1ae0bc18651,Dyslipidemia,2025-04-06,active
+7b95b9d0-664b-20c8-b97b-51e24e73bf7d,Type 2 diabetes,2021-12-22,active
+7b95b9d0-664b-20c8-b97b-51e24e73bf7d,Prediabetes,2017-10-27,resolved
+790ad9a1-6f64-c89b-9b99-964b918c40eb,Type 2 diabetes,2017-06-27,active
+790ad9a1-6f64-c89b-9b99-964b918c40eb,Prediabetes,1970-05-12,resolved
+790ad9a1-6f64-c89b-9b99-964b918c40eb,Hypertension,2021-07-19,active
+790ad9a1-6f64-c89b-9b99-964b918c40eb,Dyslipidemia,1996-04-02,active
+790ad9a1-6f64-c89b-9b99-964b918c40eb,Coronary artery disease,1996-04-02,active
+e69609d3-9285-d325-9284-96d60f750d10,Type 2 diabetes,2022-05-11,active
+e69609d3-9285-d325-9284-96d60f750d10,Prediabetes,1986-05-14,resolved
+e69609d3-9285-d325-9284-96d60f750d10,Hypertension,2012-03-14,active
+e69609d3-9285-d325-9284-96d60f750d10,Dyslipidemia,2022-06-20,active
+e69609d3-9285-d325-9284-96d60f750d10,Obesity,2020-05-20,active
+e69609d3-9285-d325-9284-96d60f750d10,Chronic kidney disease (stage 3),2026-03-19,active
+6bb9f6e8-d0c7-3e0d-579f-57da9f1f3515,Type 2 diabetes,2008-02-23,active
+6bb9f6e8-d0c7-3e0d-579f-57da9f1f3515,Prediabetes,1985-04-06,resolved
+6bb9f6e8-d0c7-3e0d-579f-57da9f1f3515,Hypertension,2009-02-28,active
+6bb9f6e8-d0c7-3e0d-579f-57da9f1f3515,Dyslipidemia,2021-03-29,active
+6bb9f6e8-d0c7-3e0d-579f-57da9f1f3515,Obesity,2023-04-08,active
+6bb9f6e8-d0c7-3e0d-579f-57da9f1f3515,Coronary artery disease,2006-02-18,active
+3b24d024-a466-fe09-4049-d78883436802,Type 2 diabetes,2017-05-03,active
+3b24d024-a466-fe09-4049-d78883436802,Prediabetes,2014-04-30,resolved
+3b24d024-a466-fe09-4049-d78883436802,Hypertension,2019-07-04,active
+3b24d024-a466-fe09-4049-d78883436802,Dyslipidemia,2021-05-04,active
+b73f5258-fd49-ce9b-1b83-93472e985397,Type 2 diabetes,2008-12-28,active
+b73f5258-fd49-ce9b-1b83-93472e985397,Prediabetes,1986-10-19,resolved
+b73f5258-fd49-ce9b-1b83-93472e985397,Hypertension,2010-09-12,active
+b73f5258-fd49-ce9b-1b83-93472e985397,Obesity,2021-04-09,active
+b73f5258-fd49-ce9b-1b83-93472e985397,Coronary artery disease,2022-10-02,active
+d3727ff2-5d7b-347f-d78c-edc4323cf890,Type 2 diabetes,2024-01-12,active
+d3727ff2-5d7b-347f-d78c-edc4323cf890,Prediabetes,1998-03-13,resolved
+d3727ff2-5d7b-347f-d78c-edc4323cf890,Hypertension,2024-01-12,active
+d3727ff2-5d7b-347f-d78c-edc4323cf890,Dyslipidemia,2024-06-18,active
+d3727ff2-5d7b-347f-d78c-edc4323cf890,Obesity,2025-10-12,active
+8d597bb2-5d4b-8ffc-7985-7e6586fa926b,Type 2 diabetes,2018-03-23,active
+8d597bb2-5d4b-8ffc-7985-7e6586fa926b,Prediabetes,1991-12-27,resolved
+8d597bb2-5d4b-8ffc-7985-7e6586fa926b,Dyslipidemia,2022-08-31,active
+2cc6efe0-8e4a-8ccd-8e89-15aab675835f,Type 2 diabetes,2018-07-03,active
+2cc6efe0-8e4a-8ccd-8e89-15aab675835f,Prediabetes,2017-06-27,resolved
+0832d9ad-468a-2b63-53be-b5bc9fc8273b,Type 2 diabetes,2011-10-02,active
+0832d9ad-468a-2b63-53be-b5bc9fc8273b,Prediabetes,2009-01-04,resolved
+0832d9ad-468a-2b63-53be-b5bc9fc8273b,Hypertension,2009-09-20,active
+0832d9ad-468a-2b63-53be-b5bc9fc8273b,Obesity,2024-09-09,active
+b6d46abe-b2e1-5302-e494-a09a93ce5434,Type 2 diabetes,1999-07-11,active
+b6d46abe-b2e1-5302-e494-a09a93ce5434,Prediabetes,1979-09-23,resolved
+b6d46abe-b2e1-5302-e494-a09a93ce5434,Dyslipidemia,2017-10-22,active
+b6d46abe-b2e1-5302-e494-a09a93ce5434,Obesity,2020-02-09,active
+b6d46abe-b2e1-5302-e494-a09a93ce5434,Coronary artery disease,2015-04-19,active
+b6d46abe-b2e1-5302-e494-a09a93ce5434,Diabetic neuropathy,2013-01-18,active
+0c54a3a6-619a-c0d1-d715-0441e398c818,Type 2 diabetes,2025-04-03,active
+0c54a3a6-619a-c0d1-d715-0441e398c818,Prediabetes,1993-03-25,resolved
+0c54a3a6-619a-c0d1-d715-0441e398c818,Hypertension,2026-04-09,active
+0c54a3a6-619a-c0d1-d715-0441e398c818,Coronary artery disease,2025-04-03,active
+e7af4ed9-1970-c4e9-adb0-895b0d6507b0,Type 2 diabetes,2018-02-14,active
+e7af4ed9-1970-c4e9-adb0-895b0d6507b0,Prediabetes,2005-10-02,resolved
+e7af4ed9-1970-c4e9-adb0-895b0d6507b0,Hypertension,2025-06-03,active
+e7af4ed9-1970-c4e9-adb0-895b0d6507b0,Dyslipidemia,2025-08-24,active
+e7af4ed9-1970-c4e9-adb0-895b0d6507b0,Obesity,2023-04-15,active
+cdf9f16d-82c4-f446-c865-0835069b1db9,Type 2 diabetes,2022-08-03,active
+cdf9f16d-82c4-f446-c865-0835069b1db9,Prediabetes,1989-02-22,resolved
+cdf9f16d-82c4-f446-c865-0835069b1db9,Hypertension,1995-03-01,active
+cdf9f16d-82c4-f446-c865-0835069b1db9,Dyslipidemia,2021-11-22,active
+cdf9f16d-82c4-f446-c865-0835069b1db9,Obesity,2025-01-02,active
+a296a2ba-b1ad-a3c5-d172-aa3dfdbcdab9,Type 2 diabetes,2021-07-15,active
+a296a2ba-b1ad-a3c5-d172-aa3dfdbcdab9,Prediabetes,2002-09-05,resolved
+a296a2ba-b1ad-a3c5-d172-aa3dfdbcdab9,Dyslipidemia,2020-02-08,active
+6de3fef5-24fc-b99d-09b3-cb149aee3178,Prediabetes,1982-09-16,active
+6de3fef5-24fc-b99d-09b3-cb149aee3178,Hypertension,2006-08-03,active
+6de3fef5-24fc-b99d-09b3-cb149aee3178,Dyslipidemia,2025-09-01,active
+6de3fef5-24fc-b99d-09b3-cb149aee3178,Obesity,2024-05-23,active
+1bc96a10-ad49-d71d-d8da-57881014352c,Prediabetes,1988-06-22,active
+1bc96a10-ad49-d71d-d8da-57881014352c,Obesity,2025-06-09,active
+c9734be7-92c0-97f5-02d1-0cceac3653f0,Prediabetes,1979-03-06,active
+c9734be7-92c0-97f5-02d1-0cceac3653f0,Hypertension,2015-02-17,active
+c9734be7-92c0-97f5-02d1-0cceac3653f0,Obesity,2021-10-26,active
+259579f5-e088-c375-c3cb-1222df223671,Prediabetes,2010-03-01,active
+259579f5-e088-c375-c3cb-1222df223671,Obesity,2024-09-24,active
+97d6f36f-af43-2207-4e60-18684490434d,Prediabetes,1973-02-19,active
+97d6f36f-af43-2207-4e60-18684490434d,Hypertension,2006-01-16,active
+97d6f36f-af43-2207-4e60-18684490434d,Obesity,2024-02-08,active
+97d6f36f-af43-2207-4e60-18684490434d,Coronary artery disease,2012-02-20,active
+832f6f88-564b-a360-d175-b03c028c8cd9,Prediabetes,1993-02-08,active
+832f6f88-564b-a360-d175-b03c028c8cd9,Obesity,2020-08-11,active
+c8bfb193-95f3-bbc9-ad2d-12a94ee5c2d8,Prediabetes,2019-03-05,active
+c8bfb193-95f3-bbc9-ad2d-12a94ee5c2d8,Obesity,2022-02-28,active
+fdd3d5e1-4161-1586-2ab6-b7a411d22da5,Prediabetes,2016-05-04,active
+fdd3d5e1-4161-1586-2ab6-b7a411d22da5,Obesity,2024-07-02,active
+1f720def-1bd4-df8f-b3cb-15d207ab121d,Prediabetes,2021-03-22,active
+1f720def-1bd4-df8f-b3cb-15d207ab121d,Hypertension,2025-04-14,active
+1f720def-1bd4-df8f-b3cb-15d207ab121d,Obesity,2023-11-05,active
+8b913f3e-bfb1-9aa1-4854-fe21e6590ecd,Prediabetes,1990-05-19,active
+aaf11fe2-9654-5eac-e9f2-8ae39a992d92,Prediabetes,1994-06-20,active
+aaf11fe2-9654-5eac-e9f2-8ae39a992d92,Hypertension,2022-05-17,active
+aaf11fe2-9654-5eac-e9f2-8ae39a992d92,Coronary artery disease,2020-05-04,active
+ad27f9cb-0e01-7165-32e1-7c652d095bd3,Prediabetes,2001-08-09,active
+ad27f9cb-0e01-7165-32e1-7c652d095bd3,Hypertension,1993-06-24,active
+ad27f9cb-0e01-7165-32e1-7c652d095bd3,Obesity,2021-09-01,active
+ad27f9cb-0e01-7165-32e1-7c652d095bd3,Coronary artery disease,2023-07-27,active
+48bb6fe9-2445-f79f-0bad-d6e62f35bfc3,Prediabetes,1993-01-30,active
+48bb6fe9-2445-f79f-0bad-d6e62f35bfc3,Dyslipidemia,2021-02-06,active
+902020e2-73d7-b0ab-51f5-07137486340f,Prediabetes,2003-06-30,active
+902020e2-73d7-b0ab-51f5-07137486340f,Hypertension,2002-06-24,active
+902020e2-73d7-b0ab-51f5-07137486340f,Coronary artery disease,2021-10-11,active
+746511b0-1fb6-c8bd-da65-dd97c26a8fae,Prediabetes,2004-09-25,active
+746511b0-1fb6-c8bd-da65-dd97c26a8fae,Obesity,2022-09-23,active
+dbb51eb3-1358-f66b-dbc6-146ff97c07ae,Obesity,2025-04-12,active
+da91f118-cccd-72cb-178b-3460b5201f67,Hypertension,2023-06-14,active
+7cfe5946-e9b8-fda6-bf6a-2845cacff3f9,Coronary artery disease,2005-08-30,active
+722e6372-21a7-ddca-6688-1a18547a1c48,Hypertension,2024-06-07,active
+722e6372-21a7-ddca-6688-1a18547a1c48,Dyslipidemia,2026-05-12,active
+b4e555f9-d758-7e8e-8759-345008373b54,Hypertension,2021-07-18,active
+84417c0d-0db8-dc7c-4a7d-f80a70b0d7e7,Hypertension,2022-08-28,active
+84417c0d-0db8-dc7c-4a7d-f80a70b0d7e7,Obesity,2021-05-04,active
+70aef97e-45c9-e0ce-5008-958703676d05,Hypertension,2025-04-22,active
+70aef97e-45c9-e0ce-5008-958703676d05,Dyslipidemia,2024-12-05,active
+70aef97e-45c9-e0ce-5008-958703676d05,Coronary artery disease,2022-04-05,active
+6e174f7c-e6cd-b643-936e-1f157379f378,Hypertension,2011-11-26,active
+6e174f7c-e6cd-b643-936e-1f157379f378,Coronary artery disease,2025-02-08,active
+ee3b68cf-7893-8be0-95be-64545da3c021,Dyslipidemia,2022-06-15,active
+72c05512-5529-1450-7245-3dddb25874ef,Hypertension,2020-11-27,active
+72c05512-5529-1450-7245-3dddb25874ef,Coronary artery disease,1998-01-18,active

@@ -1,0 +1,11 @@
+numpy
+pandas
+pyarrow
+scipy
+scikit-learn
+lightgbm
+simglucose
+setuptools<81   # simglucose -> gym needs distutils on Python 3.12
+streamlit
+plotly
+pytest

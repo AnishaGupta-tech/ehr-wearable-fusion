@@ -36,6 +36,7 @@ Synthea (Apache-2.0) ──► EHR tables ────────────�
 | `timeseries.parquet` | `ingestion/align.py` | shared 5-min timeline, all patients |
 | `fused_timeline.parquet` | `ingestion/align.py` | timeline + EHR features valid at each timestamp |
 | `results/ablation.{csv,json}` | `models/ablation.py` | metrics, paired tests, top features |
+| `results/events.{csv,json}`, `events_operating_points.csv`, `event_risk.parquet`, `event_models/*.txt` | `models/events.py` | event metrics and thresholds; out-of-fold risk and 60-min forecast band per timestamp; per-fold fused classifiers for explanations |
 
 ## EHR tables
 

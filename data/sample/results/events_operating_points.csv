@@ -1,0 +1,15 @@
+event,model,operating_point,threshold,precision,recall,episode_precision,n_onsets,onsets_caught_pct,median_lead_min,alerts_per_patient_day
+hyper,Trend rule,balanced,147.5,0.3472,0.4079,0.3197,446.0,99.5516,70.0,5.4473
+hypo,Trend rule,balanced,-69.7,0.2781,0.2308,0.189,118.0,97.4576,65.0,2.239
+hyper,Wearable-only,balanced,0.2473,0.5048,0.5097,0.4895,446.0,91.9283,90.0,2.7337
+hyper,Wearable-only,sensitive,0.0691,0.3607,0.7348,0.3333,446.0,99.5516,120.0,3.4142
+hyper,Wearable-only,precise,0.4945,0.5986,0.2893,0.6173,446.0,75.7848,60.0,2.0474
+hypo,Wearable-only,balanced,0.0598,0.3217,0.3493,0.29,118.0,67.7966,92.5,0.8578
+hypo,Wearable-only,sensitive,0.0021,0.1424,0.7459,0.1031,118.0,99.1525,120.0,2.2189
+hypo,Wearable-only,precise,0.53,0.4338,0.0615,0.5082,118.0,24.5763,50.0,0.1744
+hyper,Fused,balanced,0.2522,0.4516,0.496,0.5045,446.0,82.0628,95.0,2.2447
+hyper,Fused,sensitive,0.054,0.3382,0.7469,0.3949,446.0,97.7578,120.0,2.5707
+hyper,Fused,precise,0.5396,0.5968,0.2791,0.6326,446.0,65.2466,65.0,1.7042
+hypo,Fused,balanced,0.0231,0.2844,0.3836,0.2969,118.0,71.1864,90.0,0.8378
+hypo,Fused,sensitive,0.0018,0.1565,0.7433,0.1248,118.0,97.4576,120.0,1.6728
+hypo,Fused,precise,0.3509,0.3715,0.0473,0.4429,118.0,24.5763,25.0,0.2002

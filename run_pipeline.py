@@ -26,7 +26,7 @@ def stage_synthea():
 
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--profile", default="sample", choices=["sample", "full"])
-    ap.add_argument("--stages", default="synthea,ehr,wearables,ingest,models"); ap.add_argument("--workers", type=int, default=8)
+    ap.add_argument("--stages", default="synthea,ehr,wearables,ingest,models,events"); ap.add_argument("--workers", type=int, default=8)
     a = ap.parse_args(); stages = a.stages.split(","); t0 = time.time()
     if "synthea" in stages: stage_synthea()
     if "ehr" in stages:
@@ -37,6 +37,8 @@ def main():
         from ingestion.align import build_timeseries; build_timeseries(a.profile)
     if "models" in stages:
         from models.ablation import run as ablate; ablate(a.profile, stride=3 if a.profile == "sample" else 6)
+    if "events" in stages:
+        from models.events import run as events; events(a.profile, eval_stride=1 if a.profile == "sample" else 2, train_stride=3 if a.profile == "sample" else 6)
     print(f"[pipeline] done in {time.time()-t0:.0f}s")
 
 if __name__ == "__main__":

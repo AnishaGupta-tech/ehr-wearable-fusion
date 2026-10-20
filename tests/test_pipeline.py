@@ -58,3 +58,42 @@ def test_fuse_no_future_lab_leakage(ehr):
     day_of_lab = pd.Timestamp(future.date[0]); before = f[f.timestamp < day_of_lab + pd.Timedelta(days=1)]
     assert (before.hba1c_latest < 50).all()           # lab dated D is invisible on day D (strictly before)
     assert (f[f.timestamp >= day_of_lab + pd.Timedelta(days=1)].hba1c_latest == 99.0).all()
+
+# ---------------------------------------------------------------- adverse-event labels
+def _tl(g):
+    n = len(g); z = np.zeros(n)
+    return pd.DataFrame(dict(patient_id="p", timestamp=pd.date_range("2026-10-01", periods=n, freq="5min"), glucose=g, hr=z + 70, steps=z, active_energy=z,
+                             sleep_stage=z, carbs_logged=z, insulin_bolus_logged=z, sleep_hours_last_night=z, sleep_efficiency_last_night=z, rhr_trend_7d=z,
+                             resting_hr=z, hrv_rmssd_latest=z, spo2_night_min=z, wrist_temp_dev=z, device_gap_minutes=z, glucose_imputed=z, hr_missing=z))
+
+def test_event_label_uses_only_future_window():
+    from models.events import patient_frame, WINDOW
+    g = np.full(80, 120.0); g[50] = 200.0                      # single spike at index 50
+    X = patient_frame(_tl(g))
+    assert X.y_hyper[50 - WINDOW:50].eq(1).all()               # 2 h before the spike -> positive
+    assert X.y_hyper[50] == 0 and X.y_hyper[51] == 0           # spike itself / after it is not "future"
+    assert X.y_hyper[:50 - WINDOW].eq(0).all()
+    assert X.y_hyper[-WINDOW:].isna().all()                    # incomplete look-ahead window is dropped
+
+def test_onsets_and_lead_time():
+    from models.events import find_onsets, lead_times
+    g = np.full(60, 120.0); g[40:] = 200.0; g[10:12] = 175.0
+    on = find_onsets(_tl(g)); assert [(k, t) for t, k in on] == [("hyper", pd.Timestamp("2026-10-01") + pd.Timedelta(minutes=5 * 40))]
+    d = _tl(g)[["patient_id", "timestamp"]]; flag = np.zeros(60, bool); flag[34] = True            # alert 30 min before onset
+    n, leads = lead_times(d, flag, pd.DataFrame(on, columns=["timestamp", "kind"]).assign(patient_id="p"), "hyper")
+    assert n == 1 and leads == [30.0]
+
+# ---------------------------------------------------------------- streaming
+def test_stream_features_equal_batch_and_scores_match_oof():
+    from models.events import patient_frame, FUSED, HISTORY_ROWS, score_stream
+    import json
+    fused = pd.read_parquet(data_dir(P) / "fused_timeline.parquet"); pid = fused.patient_id.iloc[0]
+    tl = fused[fused.patient_id == pid].sort_values("timestamp").reset_index(drop=True); full = patient_frame(tl)
+    meta = json.load(open(data_dir(P) / "results" / "events.json")); risk = pd.read_parquet(data_dir(P) / "results" / "event_risk.parquet"); risk = risk[risk.patient_id == pid].set_index("timestamp")
+    checked = 0
+    for i in (400, 777, 1200, 1500):
+        part = patient_frame(tl.iloc[:i + 1].tail(HISTORY_ROWS)).iloc[-1]       # only data up to i, as in a live feed
+        np.testing.assert_allclose(part[FUSED].astype(float).values, full.loc[i, FUSED].astype(float).values, rtol=1e-5, equal_nan=True)
+        sc = score_stream(P, tl.iloc[:i + 1], meta["patient_fold"][pid]); t = tl.timestamp[i]
+        if sc["in_range"] and t in risk.index: assert abs(sc["hyper"][0] - risk.loc[t, "p_hyper"]) < 1e-4; checked += 1
+    assert checked >= 1

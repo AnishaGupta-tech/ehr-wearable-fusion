@@ -68,16 +68,16 @@ def _tl(g):
 
 def test_event_label_uses_only_future_window():
     from models.events import patient_frame, WINDOW
-    g = np.full(80, 120.0); g[50] = 200.0                      # single spike at index 50
+    g = np.full(80, 120.0); g[50:53] = 200.0; g[10] = 250.0       # 15-min excursion at index 50; a single-sample spike at 10 is ignored
     X = patient_frame(_tl(g))
-    assert X.y_hyper[50 - WINDOW:50].eq(1).all()               # 2 h before the spike -> positive
-    assert X.y_hyper[50] == 0 and X.y_hyper[51] == 0           # spike itself / after it is not "future"
-    assert X.y_hyper[:50 - WINDOW].eq(0).all()
+    assert X.y_hyper[50 - WINDOW + 2:50].eq(1).all()               # 2 h before the spike -> positive
+    assert X.y_hyper[50] == 0 and X.y_hyper[51] == 0           # the excursion itself / after it is not "future"
+    assert X.y_hyper[:50 - WINDOW + 2].eq(0).all() and X.y_hyper[:10].eq(0).all()
     assert X.y_hyper[-WINDOW:].isna().all()                    # incomplete look-ahead window is dropped
 
 def test_onsets_and_lead_time():
     from models.events import find_onsets, lead_times
-    g = np.full(60, 120.0); g[40:] = 200.0; g[10:12] = 175.0
+    g = np.full(60, 120.0); g[40:] = 200.0; g[10:12] = 175.0; g[20] = 60.0
     on = find_onsets(_tl(g)); assert [(k, t) for t, k in on] == [("hyper", pd.Timestamp("2026-10-01") + pd.Timedelta(minutes=5 * 40))]
     d = _tl(g)[["patient_id", "timestamp"]]; flag = np.zeros(60, bool); flag[34] = True            # alert 30 min before onset
     n, leads = lead_times(d, flag, pd.DataFrame(on, columns=["timestamp", "kind"]).assign(patient_id="p"), "hyper")

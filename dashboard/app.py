@@ -437,6 +437,11 @@ else:
         mc = {"Trend rule": GREY, "Wearable-only": BLUE, "Fused": GREEN}; fig = go.Figure()
         for m_ in mc: d_ = ev[(ev.model == m_) & (ev.event != "any")]; fig.add_trace(go.Bar(x=d_.event.map({"hyper": "Above 180", "hypo": "Below 70"}), y=d_.AP, name=m_, marker_color=mc[m_], text=d_.AP.round(2), textposition="outside"))
         style(fig, 320, "Average precision (higher is better)"); fig.update_layout(barmode="group", yaxis=dict(range=[0, ev.AP.max() * 1.25])); st.plotly_chart(fig, width="stretch")
+        if "cold_start" in em:
+            cs = pd.DataFrame(em["cold_start"]).T.reset_index(); cs[["Model", "Event"]] = cs["index"].str.split("|", expand=True); cs["Event"] = cs.Event.map({"hyper": "Above 180", "hypo": "Below 70"})
+            with st.expander("Day-one performance: first 24 hours of a patient's data (little wearable history yet)"):
+                st.dataframe(cs[["Event", "Model", "AUC", "AP"]].rename(columns={"AP": "Avg. precision"}).round(3), hide_index=True, width="stretch")
+                st.markdown('<p class="note">Once a patient has a day or more of CGM, their own recent history carries most of the signal and the health record adds little; in the first 24 h the record is a useful prior.</p>', unsafe_allow_html=True)
         f6, f12 = em["forecast"]["60min"], em["forecast"]["120min"]
         kpis([("Forecast +1 h error", f"{f6['median_MAE']:.1f}", "mg/dL", f"persistence {f6['persistence_MAE']:.1f}", "good"), ("Forecast +2 h error", f"{f12['median_MAE']:.1f}", "mg/dL", f"persistence {f12['persistence_MAE']:.1f}", "good"),
               ("Band coverage +1 h", f"{f6['empirical_coverage']*100:.0f}", "%", "target 80%"), ("Band coverage +2 h", f"{f12['empirical_coverage']*100:.0f}", "%", "target 80%")])

@@ -2,15 +2,15 @@
  "profile": "sample",
  "window_min": 120,
  "n_patients": 50,
- "n_rows": 76388,
+ "n_rows": 76136,
  "patient_days": 349.7,
  "thresholds": {
-  "Trend rule|hyper": 147.5,
-  "Trend rule|hypo": -69.69999694824219,
-  "Wearable-only|hyper": 0.24725816343049584,
-  "Wearable-only|hypo": 0.05981900548086176,
-  "Fused|hyper": 0.25221337753713574,
-  "Fused|hypo": 0.02314793342574503
+  "Trend rule|hyper": 157.29998779296875,
+  "Trend rule|hypo": -52.60000228881836,
+  "Wearable-only|hyper": 0.19448872048103114,
+  "Wearable-only|hypo": 0.010855294079408129,
+  "Fused|hyper": 0.17960180657673985,
+  "Fused|hypo": 0.0052760860304462
  },
  "confirm_min": 10,
  "confirm_rows": 2,
@@ -141,181 +141,228 @@
   "glucose_roc60",
   "glucose_accel",
   "min_since_logged_bolus",
-  "steps_120"
+  "steps_120",
+  "iob_logged",
+  "cob_logged",
+  "iob_per_cob",
+  "active_energy_120",
+  "hr_excess_60",
+  "n_low_24h",
+  "min_glucose_24h",
+  "frac_below_90_24h",
+  "glucose_cv_24h",
+  "min_since_low",
+  "n_low_72h",
+  "mean_glucose_24h",
+  "glucose_ewm15",
+  "glucose_ewm30",
+  "slope_ewm30",
+  "slope_30",
+  "slope_60",
+  "min_to_70_at_slope",
+  "min_since_peak3h",
+  "n_low_same_tod_3d"
  ],
  "forecast": {
   "60min": {
    "band": "80% (conformalised)",
-   "widen_mg_dl": 4.047617830588383,
+   "widen_mg_dl": 3.713030248636955,
    "empirical_coverage": 0.799993747525062,
-   "median_MAE": 13.592605323443598,
+   "median_MAE": 12.9549520367525,
    "persistence_MAE": 16.890552520751953
   },
   "120min": {
    "band": "80% (conformalised)",
-   "widen_mg_dl": 7.0085970951148875,
+   "widen_mg_dl": 5.935067952814462,
    "empirical_coverage": 0.7999978893825389,
-   "median_MAE": 19.27990164577824,
+   "median_MAE": 18.26775551747073,
    "persistence_MAE": 25.09868812561035
   }
  },
  "ops": {
   "Trend rule|hyper": {
    "balanced": {
-    "threshold": 147.5,
-    "precision": 0.3472036789793799,
-    "recall": 0.40789473684210525,
-    "episode_precision": 0.31968503937007875,
-    "n_onsets": 446.0,
-    "onsets_caught_pct": 99.55156950672645,
-    "median_lead_min": 70.0,
-    "alerts_per_patient_day": 5.447288468794059
+    "threshold": 157.29998779296875,
+    "precision": 0.3084517738960616,
+    "recall": 0.3135546487261498,
+    "episode_precision": 0.2986683576410907,
+    "n_onsets": 326.0,
+    "onsets_caught_pct": 96.31901840490798,
+    "median_lead_min": 45.0,
+    "alerts_per_patient_day": 4.509382632697234
    }
   },
   "Trend rule|hypo": {
    "balanced": {
-    "threshold": -69.69999694824219,
-    "precision": 0.2780811232449298,
-    "recall": 0.2308190352865005,
-    "episode_precision": 0.18901660280970625,
-    "n_onsets": 118.0,
-    "onsets_caught_pct": 97.45762711864407,
-    "median_lead_min": 65.0,
-    "alerts_per_patient_day": 2.2389642367799203
+    "threshold": -52.60000228881836,
+    "precision": 0.248046875,
+    "recall": 0.1,
+    "episode_precision": 0.1965065502183406,
+    "n_onsets": 41.0,
+    "onsets_caught_pct": 75.60975609756098,
+    "median_lead_min": 45.0,
+    "alerts_per_patient_day": 0.6548184038602832
    }
   },
   "Wearable-only|hyper": {
    "balanced": {
-    "threshold": 0.24725816343049584,
-    "precision": 0.5047898506947441,
-    "recall": 0.509672359707215,
-    "episode_precision": 0.4895397489539749,
-    "n_onsets": 446.0,
-    "onsets_caught_pct": 91.92825112107623,
-    "median_lead_min": 90.0,
-    "alerts_per_patient_day": 2.7336523759407454
+    "threshold": 0.19448872048103114,
+    "precision": 0.47399336807200376,
+    "recall": 0.5517811845152751,
+    "episode_precision": 0.4392523364485981,
+    "n_onsets": 326.0,
+    "onsets_caught_pct": 89.57055214723927,
+    "median_lead_min": 95.0,
+    "alerts_per_patient_day": 2.1417422903552494
    },
    "sensitive": {
-    "threshold": 0.06905499580922698,
-    "precision": 0.36066204772902233,
-    "recall": 0.7348379226211224,
-    "episode_precision": 0.3333333333333333,
-    "n_onsets": 446.0,
-    "onsets_caught_pct": 99.55156950672645,
-    "median_lead_min": 120.0,
-    "alerts_per_patient_day": 3.4142060009134414
+    "threshold": 0.0573958904169085,
+    "precision": 0.3727067379207757,
+    "recall": 0.7461122752839969,
+    "episode_precision": 0.3241758241758242,
+    "n_onsets": 326.0,
+    "onsets_caught_pct": 98.15950920245399,
+    "median_lead_min": 115.0,
+    "alerts_per_patient_day": 2.602116801366191
    },
    "precise": {
-    "threshold": 0.4944914745857283,
-    "precision": 0.5986296429859358,
-    "recall": 0.289299407459045,
-    "episode_precision": 0.61731843575419,
-    "n_onsets": 446.0,
-    "onsets_caught_pct": 75.7847533632287,
-    "median_lead_min": 60.0,
-    "alerts_per_patient_day": 2.0473798129430687
+    "threshold": 0.4808264025404653,
+    "precision": 0.615539858728557,
+    "recall": 0.33638469173927427,
+    "episode_precision": 0.5741444866920152,
+    "n_onsets": 326.0,
+    "onsets_caught_pct": 70.85889570552148,
+    "median_lead_min": 65.0,
+    "alerts_per_patient_day": 1.5040807005699082
    }
   },
   "Wearable-only|hypo": {
    "balanced": {
-    "threshold": 0.05981900548086176,
-    "precision": 0.32170542635658916,
-    "recall": 0.3493039818711557,
-    "episode_precision": 0.29,
-    "n_onsets": 118.0,
-    "onsets_caught_pct": 67.79661016949153,
-    "median_lead_min": 92.5,
-    "alerts_per_patient_day": 0.8578407037470959
+    "threshold": 0.010855294079408129,
+    "precision": 0.22607993540573273,
+    "recall": 0.4409448818897638,
+    "episode_precision": 0.1708542713567839,
+    "n_onsets": 41.0,
+    "onsets_caught_pct": 78.04878048780488,
+    "median_lead_min": 95.0,
+    "alerts_per_patient_day": 0.5690343334855736
    },
    "sensitive": {
-    "threshold": 0.002111580935601678,
-    "precision": 0.1424420401854714,
-    "recall": 0.7458724506312723,
-    "episode_precision": 0.10309278350515463,
-    "n_onsets": 118.0,
-    "onsets_caught_pct": 99.15254237288136,
-    "median_lead_min": 120.0,
-    "alerts_per_patient_day": 2.218947953692488
+    "threshold": 0.0006310515320857963,
+    "precision": 0.11472044439077406,
+    "recall": 0.7480314960629921,
+    "episode_precision": 0.08,
+    "n_onsets": 41.0,
+    "onsets_caught_pct": 100.0,
+    "median_lead_min": 115.0,
+    "alerts_per_patient_day": 1.1437876049961277
    },
    "precise": {
-    "threshold": 0.5300216121566618,
-    "precision": 0.4337899543378995,
-    "recall": 0.06150857882809971,
-    "episode_precision": 0.5081967213114754,
-    "n_onsets": 118.0,
-    "onsets_caught_pct": 24.576271186440678,
-    "median_lead_min": 50.0,
-    "alerts_per_patient_day": 0.1744276097619095
+    "threshold": 0.4869339148713513,
+    "precision": 0.31901840490797545,
+    "recall": 0.04094488188976378,
+    "episode_precision": 0.2,
+    "n_onsets": 41.0,
+    "onsets_caught_pct": 9.75609756097561,
+    "median_lead_min": 90.0,
+    "alerts_per_patient_day": 0.05718938024980639
    }
   },
   "Fused|hyper": {
    "balanced": {
-    "threshold": 0.25221337753713574,
-    "precision": 0.4516026658203745,
-    "recall": 0.4959916347159289,
-    "episode_precision": 0.5044585987261146,
-    "n_onsets": 446.0,
-    "onsets_caught_pct": 82.0627802690583,
-    "median_lead_min": 95.0,
-    "alerts_per_patient_day": 2.244683174804901
+    "threshold": 0.17960180657673985,
+    "precision": 0.45394736842105265,
+    "recall": 0.5022609462887394,
+    "episode_precision": 0.47083926031294454,
+    "n_onsets": 326.0,
+    "onsets_caught_pct": 84.96932515337423,
+    "median_lead_min": 75.0,
+    "alerts_per_patient_day": 2.0102067157806944
    },
    "sensitive": {
-    "threshold": 0.05397937719429157,
-    "precision": 0.3381998974075682,
-    "recall": 0.7468630184733357,
-    "episode_precision": 0.39488320355951056,
-    "n_onsets": 446.0,
-    "onsets_caught_pct": 97.75784753363229,
+    "threshold": 0.036028161760536144,
+    "precision": 0.3136045271116471,
+    "recall": 0.7456711150325356,
+    "episode_precision": 0.3181818181818182,
+    "n_onsets": 326.0,
+    "onsets_caught_pct": 97.54601226993866,
     "median_lead_min": 120.0,
-    "alerts_per_patient_day": 2.5706626422287973
+    "alerts_per_patient_day": 2.579241049266268
    },
    "precise": {
-    "threshold": 0.5396335658161948,
-    "precision": 0.5967952301099311,
-    "recall": 0.27910421749738584,
-    "episode_precision": 0.6325503355704698,
-    "n_onsets": 446.0,
-    "onsets_caught_pct": 65.24663677130044,
-    "median_lead_min": 65.0,
-    "alerts_per_patient_day": 1.7042435314442304
+    "threshold": 0.5051246825284574,
+    "precision": 0.6014472585583078,
+    "recall": 0.23833682585199073,
+    "episode_precision": 0.6157205240174672,
+    "n_onsets": 326.0,
+    "onsets_caught_pct": 58.895705521472394,
+    "median_lead_min": 55.0,
+    "alerts_per_patient_day": 1.3096368077205665
    }
   },
   "Fused|hypo": {
    "balanced": {
-    "threshold": 0.02314793342574503,
-    "precision": 0.28444551128180506,
-    "recall": 0.3836192942699903,
-    "episode_precision": 0.29692832764505117,
-    "n_onsets": 118.0,
-    "onsets_caught_pct": 71.1864406779661,
-    "median_lead_min": 90.0,
-    "alerts_per_patient_day": 0.8378244206596637
+    "threshold": 0.0052760860304462,
+    "precision": 0.20052375607931164,
+    "recall": 0.4220472440944882,
+    "episode_precision": 0.15463917525773196,
+    "n_onsets": 41.0,
+    "onsets_caught_pct": 73.17073170731707,
+    "median_lead_min": 97.5,
+    "alerts_per_patient_day": 0.554736988423122
    },
    "sensitive": {
-    "threshold": 0.0017875005834123122,
-    "precision": 0.1565418967750733,
-    "recall": 0.743282615733247,
-    "episode_precision": 0.12478632478632479,
-    "n_onsets": 118.0,
-    "onsets_caught_pct": 97.45762711864407,
+    "threshold": 0.00034845774375071877,
+    "precision": 0.09851184238105219,
+    "recall": 0.7401574803149606,
+    "episode_precision": 0.07021276595744681,
+    "n_onsets": 41.0,
+    "onsets_caught_pct": 100.0,
     "median_lead_min": 120.0,
-    "alerts_per_patient_day": 1.672789372306837
+    "alerts_per_patient_day": 1.3439504358704502
    },
    "precise": {
-    "threshold": 0.3509412407853373,
-    "precision": 0.37150127226463103,
-    "recall": 0.04726448688896083,
-    "episode_precision": 0.44285714285714284,
-    "n_onsets": 118.0,
-    "onsets_caught_pct": 24.576271186440678,
-    "median_lead_min": 25.0,
-    "alerts_per_patient_day": 0.20016283087432238
+    "threshold": 0.1814793422914449,
+    "precision": 0.2915129151291513,
+    "recall": 0.06220472440944882,
+    "episode_precision": 0.41935483870967744,
+    "n_onsets": 41.0,
+    "onsets_caught_pct": 21.951219512195124,
+    "median_lead_min": 50.0,
+    "alerts_per_patient_day": 0.0886435393871999
    }
   }
  },
+ "cold_start": {
+  "Wearable-only|hyper": {
+   "n": 10488,
+   "prevalence": 0.13053013384342194,
+   "AUC": 0.8624659371570335,
+   "AP": 0.4898664305846578
+  },
+  "Wearable-only|hypo": {
+   "n": 10488,
+   "prevalence": 0.008199847303330898,
+   "AUC": 0.8369577853990512,
+   "AP": 0.054221195983788946
+  },
+  "Fused|hyper": {
+   "n": 10488,
+   "prevalence": 0.13053013384342194,
+   "AUC": 0.8526815835197801,
+   "AP": 0.4565930544047516
+  },
+  "Fused|hypo": {
+   "n": 10488,
+   "prevalence": 0.008199847303330898,
+   "AUC": 0.8618031863282106,
+   "AP": 0.0682840983251457
+  }
+ },
+ "sustain_min": 15,
  "n_onsets": {
-  "hyper": 446,
-  "hypo": 118
+  "hyper": 326,
+  "hypo": 41
  },
  "note": "Thresholds maximise F1 on pooled out-of-fold scores; lead time = earliest alert within 2 h before an onset."
 }

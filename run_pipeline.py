@@ -18,7 +18,7 @@ from config import ROOT, SYNTHEA_CSV
 
 def stage_synthea():
     if (SYNTHEA_CSV / "patients.csv").exists(): print("[synthea] already generated, skipping"); return
-    jar = ROOT / "synthea" / "synthea-with-dependencies.jar"
+    jar = ROOT / "synthea" / "synthea-with-dependencies.jar"; jar.parent.mkdir(exist_ok=True)
     if not jar.exists():
         subprocess.check_call(["curl", "-sL", "-o", str(jar), "https://github.com/synthetichealth/synthea/releases/download/master-branch-latest/synthea-with-dependencies.jar"])
     subprocess.check_call(["java", "-jar", str(jar), "-p", "3000", "-s", "42", "-a", "35-80", "--exporter.csv.export=true",

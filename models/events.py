@@ -23,16 +23,20 @@ EXTRA_WEARABLE = ["glucose_min60", "glucose_max60", "glucose_min180", "glucose_m
 # insulin/carb exposure, effort and the patient's own recent low-glucose history (all causal)
 EXTRA_PHYS = ["iob_logged", "cob_logged", "iob_per_cob", "active_energy_120", "hr_excess_60", "n_low_24h", "min_glucose_24h", "frac_below_90_24h",
               "glucose_cv_24h", "min_since_low", "n_low_72h", "mean_glucose_24h",
-              "glucose_ewm15", "glucose_ewm30", "slope_ewm30", "slope_30", "slope_60", "min_to_70_at_slope", "min_since_peak3h", "n_low_same_tod_3d"]
+              "glucose_ewm15", "glucose_ewm30", "slope_ewm30", "slope_30", "slope_60", "min_to_70_at_slope", "min_since_peak3h", "n_low_same_tod_3d",
+              # high-glucose counterparts of the personal-history features above
+              "n_high_24h", "max_glucose_24h", "frac_above_160_24h", "n_high_same_tod_3d", "min_to_180_at_slope", "glucose_minus_mean24h", "glucose_extrap60"]
 EXTRA_WEARABLE = EXTRA_WEARABLE + EXTRA_PHYS
 WEARABLE = WEARABLE_FEATS + EXTRA_WEARABLE
 FUSED = MODELS["Fully fused"] + EXTRA_WEARABLE
 FEATURE_SETS = {"Wearable-only": WEARABLE, "Fused": FUSED}
 CONFIRM_MIN = 10       # an alert needs risk above threshold now AND 10 min earlier (suppresses single-sample blips)
 EVENTS = ("hyper", "hypo")
-CLF = dict(objective="binary", n_estimators=300, learning_rate=0.05, num_leaves=31, min_child_samples=100,
+# regularised: EHR columns are constant per patient, so looser trees memorise training patients (fused AP -0.03 on held-out patients)
+CLF = dict(objective="binary", n_estimators=500, learning_rate=0.03, num_leaves=15, min_child_samples=300,
+           subsample=0.8, subsample_freq=1, colsample_bytree=0.5, reg_lambda=10.0, verbose=-1, n_jobs=8)
+REG = dict(objective="quantile", n_estimators=250, learning_rate=0.05, num_leaves=31, min_child_samples=100,
            subsample=0.8, subsample_freq=1, colsample_bytree=0.8, reg_lambda=2.0, verbose=-1, n_jobs=8)
-REG = dict(CLF, objective="quantile", n_estimators=250)
 QUANTILES = (0.1, 0.5, 0.9)
 
 def patient_frame(tl):
@@ -67,6 +71,12 @@ def patient_frame(tl):
     arr = np.nan_to_num(g.values, nan=-1.0); pad = np.r_[np.full(35, -1.0), arr]
     X["min_since_peak3h"] = (35 - np.lib.stride_tricks.sliding_window_view(pad, 36).argmax(axis=1)) * 5
     lw = low.rolling(49, center=True, min_periods=25).max(); X["n_low_same_tod_3d"] = sum(lw.shift(288 * k_).fillna(0) for k_ in (1, 2, 3))
+    high = (g > HIGH).astype(float).where(g.notna())
+    X["n_high_24h"] = high.rolling(288, min_periods=48).sum(); X["max_glucose_24h"] = g.rolling(288, min_periods=48).max()
+    X["frac_above_160_24h"] = (g > 160).astype(float).where(g.notna()).rolling(288, min_periods=48).mean()
+    hw = high.rolling(49, center=True, min_periods=25).max(); X["n_high_same_tod_3d"] = sum(hw.shift(288 * k_).fillna(0) for k_ in (1, 2, 3))
+    X["min_to_180_at_slope"] = np.where(X.slope_30 > 0.2, ((HIGH - g) / X.slope_30 * 5).clip(upper=600), 600.0)
+    X["glucose_minus_mean24h"] = g - X.mean_glucose_24h; X["glucose_extrap60"] = e3 + 12 * X.slope_ewm30
     # consensus CGM event definition: >= 15 min (3 consecutive readings) out of range, which ignores single-sample sensor spikes
     hi3, lo3 = g.rolling(SUSTAIN).min(), g.rolling(SUSTAIN).max()           # all SUSTAIN readings ending here are > HIGH / < LOW
     span = WINDOW - SUSTAIN + 1

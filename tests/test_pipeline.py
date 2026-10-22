@@ -3,6 +3,7 @@ from config import data_dir, ANCHOR
 from ingestion.align import _fill_small_gaps, fuse_with_ehr, load_raw_streams, align_to_timeline
 from wearables.simulate import COLS
 P = "sample"
+needs_raw = pytest.mark.skipif(not (data_dir(P) / "raw_wearables").exists(), reason="raw streams are gitignored; run `python run_pipeline.py --stages wearables` first")
 
 @pytest.fixture(scope="module")
 def ehr():
@@ -40,6 +41,7 @@ def test_genomics_complete_and_labeled(ehr):
     g = ehr["genomics"]; assert g.groupby("patient_id").size().eq(5).all() and (g.label == "SIMULATED").all() and g.risk_allele_count.between(0, 2).all()
     assert ehr["patients"].genetic_risk_score.between(0, 1).all()
 
+@needs_raw
 def test_raw_schema_and_native_rates(ehr):
     r = load_raw_streams(ehr["patients"].patient_id[0], P); assert list(r.columns) == COLS
     cgm = r[r.metric == "glucose"].start_time.diff().dropna(); assert (cgm >= pd.Timedelta(minutes=5)).all()
@@ -49,6 +51,7 @@ def test_small_gaps_only():
     s = pd.Series([100, np.nan, np.nan, 130, np.nan, np.nan, np.nan, np.nan, 170.0]); out, imp = _fill_small_gaps(s, 3)
     assert imp[[1, 2]].all() and not imp[[4, 5, 6, 7]].any() and out[[4, 5, 6, 7]].isna().all()
 
+@needs_raw
 def test_fuse_no_future_lab_leakage(ehr):
     pid = ehr["patients"].patient_id[0]; tl = align_to_timeline(load_raw_streams(pid, P)).iloc[:300]
     t = {k: v.copy() for k, v in ehr.items()}

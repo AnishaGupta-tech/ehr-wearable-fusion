@@ -110,7 +110,8 @@ def load_ehr(profile): return {k: pd.read_csv(D / "ehr" / f"{k}.csv") for k in (
 @st.cache_data
 def load_timeline(profile, pid): return pd.read_parquet(D / "timeseries.parquet", filters=[("patient_id", "==", pid)])
 @st.cache_data
-def load_raw(profile, pid): return pd.read_parquet(D / "raw_wearables" / f"{pid}.parquet")
+def load_raw(profile, pid):
+    f = D / "raw_wearables" / f"{pid}.parquet"; return pd.read_parquet(f) if f.exists() else None   # gitignored; absent on a fresh clone
 @st.cache_data
 def load_risk(profile, pid):
     f = D / "results" / "event_risk.parquet"
@@ -154,6 +155,10 @@ FEAT_TEXT = {"glucose": ("Current glucose", "{:.0f} mg/dL"), "glucose_roc15": ("
     "wrist_temp_dev": ("Wrist temperature deviation", "{:+.2f} °C"), "hba1c": ("HbA1c", "{:.1f} %"), "hba1c_latest": ("Latest HbA1c", "{:.1f} %"), "fasting_glucose": ("Fasting glucose", "{:.0f} mg/dL"),
     "bmi": ("BMI", "{:.1f}"), "age": ("Age", "{:.0f}"), "egfr": ("eGFR", "{:.0f}"), "homa_ir": ("HOMA-IR", "{:.1f}"), "on_insulin": ("On insulin", "{:.0f}"),
     "on_sulfonylurea": ("On sulfonylurea", "{:.0f}"), "on_metformin": ("On metformin", "{:.0f}"), "on_sglt2": ("On SGLT2 inhibitor", "{:.0f}"), "years_since_dx": ("Years since diagnosis", "{:.1f}"),
+    "n_high_24h": ("High readings, last 24 h", "{:.0f}"), "max_glucose_24h": ("Highest glucose, last 24 h", "{:.0f} mg/dL"),
+    "frac_above_160_24h": ("Share of time > 160, last 24 h", "{:.0%}"), "n_high_same_tod_3d": ("Highs at this hour, past 3 days", "{:.0f}"),
+    "min_to_180_at_slope": ("Minutes to 180 at current trend", "{:.0f} min"), "glucose_minus_mean24h": ("Glucose vs 24 h average", "{:+.0f} mg/dL"),
+    "glucose_extrap60": ("Trend-projected glucose in 1 h", "{:.0f} mg/dL"),
     "genetic_risk_score": ("Genetic risk score (sim.)", "{:.2f}"), "hba1c_slope_2y": ("HbA1c trend per year", "{:+.2f}"), "n_glucose_lowering_classes": ("Glucose-lowering drug classes", "{:.0f}")}
 RECORD_FEATS = set(FT.SNAPSHOT_FEATS + FT.FULL_EXTRA)
 def feat_text(f, v):
@@ -315,8 +320,10 @@ elif page == "Patient view":
         kpis([("Polygenic risk score", p.genetic_risk_score, "", "top quartile of cohort" if p.genetic_risk_flag else "below top quartile", "bad" if p.genetic_risk_flag else "")])
 
     with t_dev:
-        rows = [{"Device": dev, "Status": "Connected", "Last sync": d.end_time.max().strftime("%Y-%m-%d %H:%M"), "Data types": ", ".join(sorted(d.metric.unique())), "Records": len(d)} for dev, d in raw.groupby("source_device")]
-        st.dataframe(pd.DataFrame(rows), hide_index=True, width="stretch"); st.markdown('<p class="note">Devices are simulated.</p>', unsafe_allow_html=True)
+        if raw is None: st.info("Raw device streams not generated. Run `python run_pipeline.py --stages wearables` to see them.")
+        else:
+            rows = [{"Device": dev, "Status": "Connected", "Last sync": d.end_time.max().strftime("%Y-%m-%d %H:%M"), "Data types": ", ".join(sorted(d.metric.unique())), "Records": len(d)} for dev, d in raw.groupby("source_device")]
+            st.dataframe(pd.DataFrame(rows), hide_index=True, width="stretch"); st.markdown('<p class="note">Devices are simulated.</p>', unsafe_allow_html=True)
         section("Data quality")
         kpis([("Glucose coverage", f"{tl.glucose.notna().mean()*100:.1f}", "%"), ("Longest CGM gap", int(tl.device_gap_minutes.max()), "min"),
               ("Gaps filled (≤ 15 min)", f"{tl.glucose_imputed.mean()*100:.2f}", "%"), ("HR bins without reading", f"{tl.hr_missing.mean()*100:.0f}", "%")])

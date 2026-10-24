@@ -366,13 +366,13 @@ def build():
         ["Fuse both streams", "5 minute timeline; EHR joined only from labs dated before each timestamp", "ingestion/align.py"],
         ["Predict an adverse event", "P(glucose above 180) and P(below 70) within 2 h, plus 1 h and 2 h forecasts", "models/events.py"],
         ["Conceptual doctor dashboard", "Working Streamlit app: triage, patient view, live monitor, results", "dashboard/app.py"],
-        ["Synthetic or open data only", "No real patient data; MIMIC IV not used", "CONTRACT.md"], ["Architecture diagram and presentation (PDF or PPT)", "Generated from code so numbers stay in sync", "docs/"], ["Open source licence details", "MIT licence; Synthea is Apache 2.0", "LICENSE"], ["Video of 20 minutes or more", "Pending: unlisted YouTube link goes in the README", "README"]], fs=10, pad=0.17, until=0.75)
+        ["Synthetic or open data only", "No real patient data; MIMIC IV not used", "CONTRACT.md"], ["Architecture diagram and presentation (PDF or PPT)", "Generated from code so numbers stay in sync", "docs/"], ["Open source licence details", "MIT licence; Synthea is Apache 2.0", "LICENSE"], ["Demo video", "Unlisted YouTube link is in the README", "README"]], fs=10, pad=0.17, until=0.75)
     panel(ax, 9.0, 0.5, 4.1, 6.2, "Submission checklist", LG)
-    for i, (t, ok) in enumerate([("Public GitHub repository", True), ("README: team, title, problem, stack, license", True), ("Open source license (MIT)", True), ("Architecture diagram, PDF", True), ("Presentation, PDF", True), ("Synthetic data only", True), ("20 minute video (unlisted YouTube)", False), ("Folder name TeamTwins_IGDTUW (stated in README)", True)]):
+    for i, (t, ok) in enumerate([("Public GitHub repository", True), ("README: team, title, problem, stack, license", True), ("Open source license (MIT)", True), ("Architecture diagram, PDF", True), ("Presentation, PDF", True), ("Synthetic data only", True), ("Demo video on YouTube (link in README)", True), ("Folder name TeamTwins_IGDTUW (stated in README)", True)]):
         y = 6.0 - i * 0.62
         ax.add_patch(Circle((9.35, y), 0.17, fc=GREEN if ok else ORANGE, ec="white", zorder=4)); txt(ax, 9.35, y, "✓" if ok else "!", 10, "white", "bold", "center")
         para(ax, 9.65, y + 0.03, t, 3.3, 9.3, INK, "bold" if not ok else "normal")
-    txt(ax, 9.2, 0.85, "Video link is the one open item.", 9, ORANGE, "bold")
+    txt(ax, 9.2, 0.85, "All submission items are ready.", 9, ORANGE, "bold")
     F.append(fig)
 
     # 5 data static
@@ -624,7 +624,7 @@ def build():
     panel(ax, 0.2, 2.6, 6.6, 4.15, "Stack and licence")
     table(ax, 0.4, 6.35, [1.5, 4.8], ["Layer", "Tools"], [["Synthetic EHR", "Synthea (Apache 2.0, Java 17), custom generators"], ["Wearables", "simglucose (UVA/Padova ODE), behaviour model"], ["Data", "pandas, NumPy, SciPy, pyarrow"], ["Modelling", "LightGBM, scikit-learn, SHAP contributions"], ["Interface", "Streamlit, Plotly"], ["Quality", "pytest, 13 tests"], ["Licence", "MIT; dependencies keep their own"]], fs=8.8, pad=0.06, until=2.75)
     panel(ax, 7.0, 2.6, 6.1, 4.15, "Deliverables", LG)
-    for i, (n, l) in enumerate([("README", "team, title, problem, stack, licence"), ("LICENSE", "MIT, public repository"), ("docs/architecture.pdf", "architecture diagram"), ("docs/TeamTwins.pdf", "this deck"), ("Video", "20 minute demo, link in README")]):
+    for i, (n, l) in enumerate([("README", "team, title, problem, stack, licence"), ("LICENSE", "MIT, public repository"), ("docs/architecture.pdf", "architecture diagram"), ("docs/TeamTwins.pdf", "this deck"), ("Video", "demo on YouTube, link in README")]):
         rbox(ax, 7.2, 6.0 - i * 0.7, 2.1, 0.5, NAVY if i % 2 == 0 else CYAN, "none", 0.08, z=3); txt(ax, 8.25, 6.25 - i * 0.7, n, 8.8, "white", "bold", "center")
         txt(ax, 9.45, 6.25 - i * 0.7, l, 9, INK, "bold")
     rbox(ax, 0.2, 0.5, 12.9, 1.8, NAVY, "none", 0.12, z=2)

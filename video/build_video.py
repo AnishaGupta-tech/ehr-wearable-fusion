@@ -143,16 +143,55 @@ def retime(src, target, out):
     run(["ffmpeg", "-y", "-i", str(src), "-vf", vf, "-t", f"{target:.3f}", "-an", "-c:v", "libx264", "-preset", "veryfast", "-crf", "18", "-pix_fmt", "yuv420p", str(out)])
 
 
+def aligned_durations(n, seg_sents, ad):
+    """Per-sentence durations from the real word times of the recording (script words aligned to transcript words)."""
+    import difflib, json
+    wf = TMP / f"scene_{n:02d}_words.json"
+    if not wf.exists(): return None
+    tw = json.loads(wf.read_text()); nm = lambda w: re.sub(r"[^a-z0-9]", "", w.lower())
+    ttok = [nm(w[2]) for w in tw]
+    flat = [(si, i, [nm(w) for w in x.split() if nm(w)]) for si, ss in enumerate(seg_sents) for i, x in enumerate(ss)]
+    stok, owner = [], []
+    for fi, (_, _, toks) in enumerate(flat):
+        stok += toks; owner += [fi] * len(toks)
+    m = difflib.SequenceMatcher(None, stok, ttok, autojunk=False)
+    t_of = {}
+    for a, b, size in m.get_matching_blocks():
+        for k in range(size): t_of[a + k] = tw[b + k][0]
+    starts = [None] * len(flat)
+    for ti in range(len(stok)):
+        fi = owner[ti]
+        if starts[fi] is None and ti in t_of: starts[fi] = t_of[ti]
+    # fill gaps by interpolation, force monotonic
+    last = 0.0
+    for i in range(len(starts)):
+        if starts[i] is None:
+            nxt = next((starts[j] for j in range(i + 1, len(starts)) if starts[j] is not None), ad - 0.6)
+            starts[i] = last + (nxt - last) / 2 if nxt > last else last
+        starts[i] = max(starts[i], last); last = starts[i]
+    starts[0] = 0.0
+    ends = starts[1:] + [ad]
+    durs = [max(e - s, 0.4) for s, e in zip(starts, ends)]
+    out, k = [], 0
+    for ss in seg_sents:
+        out.append(durs[k:k + len(ss)]); k += len(ss)
+    return out
+
+
 def build_scene(n, text, audio, total_scenes_dur, start_time):
     title, slides = SCENES[n]
     ad = dur(audio) + 0.6
     segs = split_segments(text)
-    # allot time per segment by character share
-    chars = [sum(len(s) for s in sentences(t)) for _, t in segs]
-    seg_durs = [ad * c / sum(chars) for c in chars]
+    seg_sents = [sentences(t) for _, t in segs]
+    sent_dur = aligned_durations(n, seg_sents, ad)
+    if sent_dur is None:   # no transcript: fall back to character share
+        chars = [sum(len(x) for x in ss) for ss in seg_sents]
+        seg_durs = [ad * c / sum(chars) for c in chars]
+        sent_dur = [[sd * len(x) / max(sum(len(y) for y in ss), 1) for x in ss] for sd, ss in zip(seg_durs, seg_sents)]
+    seg_durs = [sum(d) for d in sent_dur]
     parts = []; t_scene = 0.0; k = 0
     for si, ((ui_key, seg_text), sd) in enumerate(zip(segs, seg_durs)):
-        sents = sentences(seg_text); weights = [len(s) for s in sents]; tot = sum(weights)
+        sents = seg_sents[si]; weights = sent_dur[si]; tot = sum(weights)
         if ui_key is None:
             # spread this segment over the scene's slides
             per_slide = []

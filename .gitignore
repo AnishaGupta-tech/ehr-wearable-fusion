@@ -7,3 +7,10 @@ data/full/
 synthea/*.jar
 *.log
 data/synthea_log.txt
+
+video/frames/
+video/clips/
+video/tmp/
+video/out/
+video/ui/
+video/audio/

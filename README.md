@@ -52,12 +52,12 @@ Setup: 800 patients over 14 days, patient grouped 5 fold cross validation, 1.2 m
 
 | Event | Model | AUC | Average precision | Alert episode precision | Events caught | Median warning | Alerts per patient day |
 |---|---|---|---|---|---|---|---|
-| Above 180 | Trend rule (baseline) | 0.755 | 0.32 | 0.30 | 94.3% | 40 min | 4.0 |
-| Above 180 | Wearable only | 0.938 | 0.69 | 0.52 | 89.3% | 80 min | 1.8 |
-| Above 180 | **Fused** | **0.938** | **0.69** | **0.52** | 89.1% | 80 min | 1.8 |
-| Below 70 | Trend rule (baseline) | 0.848 | 0.17 | 0.20 | 79.1% | 45 min | 1.1 |
-| Below 70 | Wearable only | 0.959 | 0.50 | 0.36 | 72.7% | 70 min | 0.53 |
-| Below 70 | **Fused** | **0.959** | **0.50** | **0.37** | 73.8% | 70 min | 0.54 |
+| Above 180 | Trend rule (baseline) | 0.748 | 0.31 | 0.30 | 93.7% | 40 min | 3.9 |
+| Above 180 | Wearable only | 0.932 | 0.66 | 0.50 | 88.6% | 80 min | 1.8 |
+| Above 180 | **Fused** | **0.933** | **0.67** | **0.49** | 88.9% | 80 min | 1.8 |
+| Below 70 | Trend rule (baseline) | 0.842 | 0.16 | 0.19 | 77.0% | 40 min | 1.1 |
+| Below 70 | Wearable only | 0.956 | 0.47 | 0.38 | 70.6% | 70 min | 0.49 |
+| Below 70 | **Fused** | **0.956** | **0.47** | **0.35** | 73.7% | 70 min | 0.55 |
 
 Alert episode precision is the share of alert episodes followed by an event within 2 hours. Events caught means an alert fired in the 2 hours before glucose first left range after an hour in range. For low glucose, average precision is 18 times the base rate.
 
@@ -65,23 +65,23 @@ Alert sensitivity for the fused model:
 
 | Event | Setting | Events caught | Alert episode precision | Row level precision | Alerts per patient day |
 |---|---|---|---|---|---|
-| Above 180 | sensitive | 96.7% | 0.35 | 0.48 | 2.2 |
-| Above 180 | balanced | 89.1% | 0.52 | 0.63 | 1.8 |
-| Above 180 | precise | 88.7% | 0.53 | 0.63 | 1.7 |
-| Below 70 | sensitive | 95.9% | 0.14 | 0.24 | 1.3 |
-| Below 70 | balanced | 73.8% | 0.37 | 0.49 | 0.54 |
-| Below 70 | precise | 54.7% | 0.54 | 0.65 | 0.28 |
+| Above 180 | sensitive | 97.1% | 0.33 | 0.44 | 2.3 |
+| Above 180 | balanced | 88.9% | 0.49 | 0.59 | 1.8 |
+| Above 180 | precise | 85.3% | 0.54 | 0.64 | 1.7 |
+| Below 70 | sensitive | 95.6% | 0.13 | 0.21 | 1.3 |
+| Below 70 | balanced | 73.7% | 0.35 | 0.47 | 0.55 |
+| Below 70 | precise | 52.0% | 0.55 | 0.66 | 0.25 |
 
-Glucose forecast error (fused, median): 11.8 mg/dL at 1 hour (persistence 17.4) and 16.0 at 2 hours (persistence 26.6). The 80 percent band covers 80 percent of held out outcomes.
+Glucose forecast error (fused, median): 11.9 mg/dL at 1 hour (persistence 17.4) and 16.1 at 2 hours (persistence 26.4). The 80 percent band covers 80 percent of held out outcomes.
 
-**Does the health record help?** Once a patient has a day of CGM, no: personal history features carry what the record knew, so fused and wearable only models score the same overall. In the first 24 hours, before that history exists, the record helps for high glucose (AUC 0.921 against 0.912, average precision 0.64 against 0.62) and not for low glucose (within noise). Against a wearable model without personal history features, the record lowers 60 minute glucose error from 13.5 to 12.8 mg/dL (`models/ablation.py`). The record's value here is a day one prior.
+**Does the health record help?** Once a patient has a day of CGM, no: personal history features carry what the record knew, so fused and wearable only models score the same overall. In the first 24 hours, before that history exists, the record helps for high glucose (AUC 0.916 against 0.905, average precision 0.62 against 0.59) and not for low glucose (average precision 0.38 against 0.40, within noise). Against a wearable model without personal history features, the record lowers 60 minute glucose error from 13.5 to 12.8 mg/dL (`models/ablation.py`). The record's value here is a day one prior.
 
-**Impact.** At the balanced setting a monitored patient triggers about 2.3 alerts a day (1.8 high, 0.5 low), and roughly 5 in 10 high alerts and 4 in 10 low alerts are followed by a real event. That is too many for a doctor, so the design is tiered: the patient is alerted first, and the triage board shows the clinician only who is in alert now, letting a small team supervise a large panel between visits. A clinic wanting fewer interruptions chooses the precise setting (0.28 low glucose alerts a day, 54 percent real, at the cost of missing about 45 percent of low events).
+**Impact.** At the balanced setting a monitored patient triggers about 2.4 alerts a day (1.8 high, 0.55 low), and roughly 49 percent of high alerts and 35 percent of low alerts are followed by a real event. That is too many for a doctor, so the design is tiered: the patient is alerted first, and the triage board shows the clinician only who is in alert now, letting a small team supervise a large panel between visits. A clinic wanting fewer interruptions chooses the precise setting (0.25 low glucose alerts a day, 55 percent real, at the cost of missing about 48 percent of low events).
 
 ## Limitations
 
 * The simulator is driven by the EHR, so the fusion gain shows the pipeline can recover that link, not that it exists in real patients. Validation on real, consented data is the necessary next step.
-* Hypoglycaemia is the weaker result: about 6 in 10 low glucose alert episodes are false at the balanced setting. What remains looks like unlogged insulin and meals, which no feature can recover.
+* Hypoglycaemia is the weaker result: about 65 percent of low glucose alert episodes are false at the balanced setting. What remains looks like unlogged insulin and meals, which no feature can recover.
 * Thresholds are chosen on pooled held out scores, so they are mildly optimistic, and they are not tuned to a clinical cost of missed versus false alarms.
 * What if answers come from associations learned on synthetic data and are not causal treatment advice.
 * The live monitor replays simulated streams. A real device feed needs only an adapter that appends rows to the timeline.

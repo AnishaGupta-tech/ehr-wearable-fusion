@@ -470,44 +470,44 @@ def build():
         circle_stat(ax, 0.25 + i * 3.25, 6.35, n, l, w=2.45, fs=11 if len(n) > 4 else 14)
     panel(ax, 0.2, 0.5, 6.4, 5.2, "AUC against a trend rule")
     a = chart(fig, 0.8, 1.0, 5.4, 3.9)
-    for i, (n, v, c) in enumerate([("Trend rule", [0.755, 0.848], "#9aa6c0"), ("Wearable only", [0.938, 0.959], CYAN), ("Fused", [0.938, 0.959], NAVY)]):
+    for i, (n, v, c) in enumerate([("Trend rule", [0.748, 0.842], "#9aa6c0"), ("Wearable only", [0.932, 0.956], CYAN), ("Fused", [0.933, 0.956], NAVY)]):
         a.bar([k + (i - 1) * 0.27 for k in range(2)], v, 0.26, color=c, label=n)
         for k, val in enumerate(v): a.text(k + (i - 1) * 0.27, val + 0.006, f"{val:.3f}", ha="center", fontsize=8, weight="bold")
     a.set_xticks(range(2)); a.set_xticklabels(["Glucose above 180", "Glucose below 70"]); a.set_ylim(0.6, 1.08); a.set_ylabel("AUC"); a.legend(frameon=False, ncol=3, loc="upper center", fontsize=8.5)
     panel(ax, 6.8, 0.5, 6.3, 5.2, "Held out results, balanced setting", LG)
     table(ax, 6.95, 5.3, [0.7, 1.35, 0.6, 0.65, 0.7, 0.65, 0.7], ["Event", "Model", "AUC", "AP", "Ep. prec.", "Caught", "Warn"], [
-        [">180", "Trend rule", "0.755", "0.32", "0.30", "94.3%", "40 min"], [">180", "Wearable only", "0.938", "0.69", "0.52", "89.3%", "80 min"], [">180", "Fused", "0.938", "0.69", "0.52", "89.1%", "80 min"],
-        ["<70", "Trend rule", "0.848", "0.17", "0.20", "79.1%", "45 min"], ["<70", "Wearable only", "0.959", "0.50", "0.36", "72.7%", "70 min"], ["<70", "Fused", "0.959", "0.50", "0.37", "73.8%", "70 min"]], fs=8.4, pad=0.07, hl=[2, 5], until=3.05)
+        [">180", "Trend rule", "0.748", "0.31", "0.30", "93.7%", "40 min"], [">180", "Wearable only", "0.932", "0.66", "0.50", "88.6%", "80 min"], [">180", "Fused", "0.933", "0.67", "0.49", "88.9%", "80 min"],
+        ["<70", "Trend rule", "0.842", "0.16", "0.19", "77.0%", "40 min"], ["<70", "Wearable only", "0.956", "0.47", "0.38", "70.6%", "70 min"], ["<70", "Fused", "0.956", "0.47", "0.35", "73.7%", "70 min"]], fs=8.4, pad=0.07, hl=[2, 5], until=3.05)
     para(ax, 6.95, 2.95, "Episode precision: share of alert episodes followed by an event within 2 h. Caught: alert in the 2 h before glucose first left range after an hour in range. Low glucose AP is 18 times the base rate; richer features lifted it from 0.32 to 0.47 on identical labels, 0.50 now.", 5.9, 8.8, GREY)
-    banner(ax, 6.95, 0.65, 6.0, 0.95, "HEADLINE", [("0.94 / 0.96", "AUC high / low"), ("80 / 70 min", "median warning"), ("1.8 / 0.54", "alerts per patient day")])
+    banner(ax, 6.95, 0.65, 6.0, 0.95, "HEADLINE", [("0.93 / 0.96", "AUC high / low"), ("80 / 70 min", "median warning"), ("1.85 / 0.55", "alerts per patient day")])
     F.append(fig)
 
     # 10 operating points + forecasts
     fig, ax = base(5)
     panel(ax, 0.2, 2.9, 6.4, 3.85, "Alert settings: the clinic picks the trade off")
-    table(ax, 0.4, 6.35, [0.7, 1.0, 0.9, 1.15, 1.15, 1.2], ["Event", "Setting", "Caught", "Ep. precision", "Row precision", "Alerts / day"], [[">180", "sensitive", "96.7%", "0.35", "0.48", "2.2"], [">180", "balanced", "89.1%", "0.52", "0.63", "1.8"], [">180", "precise", "88.7%", "0.53", "0.63", "1.7"], ["<70", "sensitive", "95.9%", "0.14", "0.24", "1.3"], ["<70", "balanced", "73.8%", "0.37", "0.49", "0.54"], ["<70", "precise", "54.7%", "0.54", "0.65", "0.28"]], fs=8.6, pad=0.06, hl=[1, 4], until=3.65)
-    para(ax, 0.4, 3.35, "Precise low setting: 0.28 alerts a day, 54% real, misses about 45% of lows. Sensitive: catches 96% at 14% episode precision.", 6.0, 8.8, GREY)
+    table(ax, 0.4, 6.35, [0.7, 1.0, 0.9, 1.15, 1.15, 1.2], ["Event", "Setting", "Caught", "Ep. precision", "Row precision", "Alerts / day"], [[">180", "sensitive", "97.1%", "0.33", "0.44", "2.3"], [">180", "balanced", "88.9%", "0.49", "0.59", "1.8"], [">180", "precise", "85.3%", "0.54", "0.64", "1.7"], ["<70", "sensitive", "95.6%", "0.13", "0.21", "1.3"], ["<70", "balanced", "73.7%", "0.35", "0.47", "0.55"], ["<70", "precise", "52.0%", "0.55", "0.66", "0.25"]], fs=8.6, pad=0.06, hl=[1, 4], until=3.65)
+    para(ax, 0.4, 3.35, "Precise low setting: 0.25 alerts a day, 55% real, misses about 48% of lows. Sensitive: catches 96% at 13% episode precision.", 6.0, 8.8, GREY)
     panel(ax, 6.8, 2.9, 6.3, 3.85, "Trade off curve", LG)
     a = chart(fig, 7.5, 3.4, 5.2, 2.7)
-    for lab, c, v in [("above 180", NAVY, [(96.7, .35), (89.1, .52), (88.7, .53)]), ("below 70", ORANGE, [(95.9, .14), (73.8, .37), (54.7, .54)])]:
+    for lab, c, v in [("above 180", NAVY, [(97.1, .33), (88.9, .49), (85.3, .54)]), ("below 70", ORANGE, [(95.6, .13), (73.7, .35), (52.0, .55)])]:
         a.plot([q[0] for q in v], [q[1] for q in v], "-o", color=c, lw=2.2, ms=7, label=lab)
         for nm, q in zip(["sens.", "bal.", "prec."], v): a.annotate(nm, q, textcoords="offset points", xytext=(5, 5), fontsize=7.5, color=c)
     a.set_xlabel("Events caught (%)"); a.set_ylabel("Episode precision"); a.legend(frameon=False, fontsize=8.5)
     panel(ax, 0.2, 0.5, 6.4, 2.1, "Forecast error, median mg/dL")
     a = chart(fig, 0.9, 0.75, 2.9, 1.3)
-    for i, (n, v, c) in enumerate([("Persistence", [17.4, 26.6], "#9aa6c0"), ("Fused", [11.8, 16.0], NAVY)]):
+    for i, (n, v, c) in enumerate([("Persistence", [17.4, 26.4], "#9aa6c0"), ("Fused", [11.9, 16.1], NAVY)]):
         a.bar([k + (i - .5) * .36 for k in range(2)], v, .34, color=c, label=n)
         for k, val in enumerate(v): a.text(k + (i - .5) * .36, val + .6, f"{val}", ha="center", fontsize=8, weight="bold")
     a.set_xticks(range(2)); a.set_xticklabels(["+1 h", "+2 h"]); a.set_ylim(0, 33); a.legend(frameon=False, fontsize=7.5, loc="upper left")
-    gauge(ax, 4.7, 1.55, 0.5, 80, "80% band coverage", NAVY, 10); txt(ax, 5.75, 1.55, "32% and 40%\nbetter than\npersistence", 9, INK, "bold")
+    gauge(ax, 4.7, 1.55, 0.5, 80, "80% band coverage", NAVY, 10); txt(ax, 5.75, 1.55, "32% and 39%\nbetter than\npersistence", 9, INK, "bold")
     panel(ax, 6.8, 0.5, 6.3, 2.1, "Reading the results", LG)
-    fitpara(ax, 7.0, 2.1, 0.7, 5.9, "The band is conformalised on held out patients, so 80% coverage is measured, not assumed. High glucose history features cut error from 11.9 to 11.8 mg/dL at 1 h and 16.2 to 16.0 at 2 h.", INK, "normal", 14)
+    fitpara(ax, 7.0, 2.1, 0.7, 5.9, "The band is conformalised on held out patients, so 80% coverage is measured, not assumed. Median error is 11.9 mg/dL at 1 h and 16.1 at 2 h, against 17.4 and 26.4 for repeating the last reading.", INK, "normal", 14)
     F.append(fig)
 
     # 11 ablation
     fig, ax = base(5)
     panel(ax, 0.2, 3.2, 12.9, 3.55, "Does the health record help? An honest answer")
-    for i, (t, b, c) in enumerate([("After one day of CGM: no", "Personal history features carry what the record knew. Fused and wearable only models tie: AUC 0.938 and 0.959.", NAVY), ("First 24 hours: yes for highs", "AUC 0.921 against 0.912, AP 0.64 against 0.62. For lows 0.39 against 0.42, within noise.", GREEN), ("Against no history model", "The record cuts 60 minute error from 13.5 to 12.8 mg/dL.", CYAN), ("What this really shows", "The simulator is driven by the EHR, so this shows the pipeline recovers that link, not that it exists in real patients.", ORANGE)]):
+    for i, (t, b, c) in enumerate([("After one day of CGM: no", "Personal history features carry what the record knew. Fused and wearable only models tie: AUC 0.933 and 0.956.", NAVY), ("First 24 hours: yes for highs", "AUC 0.916 against 0.905, AP 0.62 against 0.59. For lows AP 0.38 against 0.40, within noise.", GREEN), ("Against no history model", "The record cuts 60 minute error from 13.5 to 12.8 mg/dL.", CYAN), ("What this really shows", "The simulator is driven by the EHR, so this shows the pipeline recovers that link, not that it exists in real patients.", ORANGE)]):
         tile(ax, 0.4 + i * 3.2, 3.4, 3.05, 2.85, t, b, c, 9.8)
     panel(ax, 0.2, 0.5, 6.4, 2.5, "60 minute forecast MAE, sample (50 patients)", LG)
     a = chart(fig, 2.0, 0.8, 4.3, 1.7)
@@ -579,14 +579,14 @@ def build():
     # 14 impact
     fig, ax = base(7)
     panel(ax, 0.2, 0.5, 6.6, 6.25, "A tiered design a clinic can run")
-    for i, (w_, t_, b_, c) in enumerate([(6.0, "Wearable and record data", "800 patients, every 5 minutes", NAVY), (5.0, "Model alerts patients first", "about 2.3 alerts a day each at balanced", CYAN), (3.9, "Triage board", "only patients in alert now", NAVY), (2.8, "Clinician acts", "who, when and why on one screen", GREEN)]):
+    for i, (w_, t_, b_, c) in enumerate([(6.0, "Wearable and record data", "800 patients, every 5 minutes", NAVY), (5.0, "Model alerts patients first", "about 2.4 alerts a day each at balanced", CYAN), (3.9, "Triage board", "only patients in alert now", NAVY), (2.8, "Clinician acts", "who, when and why on one screen", GREEN)]):
         x = 0.5 + (6.0 - w_) / 2; y = 5.2 - i * 1.15
         ax.add_patch(Polygon([(x, y + 0.95), (x + w_, y + 0.95), (x + w_ - 0.3, y), (x + 0.3, y)], fc=c, ec="white", lw=2, zorder=3))
         txt(ax, 3.5, y + 0.62, t_, 12, "white", "bold", "center"); txt(ax, 3.5, y + 0.3, b_, 10, "white", ha="center")
     para(ax, 0.5, 0.95, "The patient is alerted first; raw alert volume never reaches the doctor.", 6.0, 9.3, GREY, "bold")
     panel(ax, 7.0, 3.1, 6.1, 3.65, "Alert volume per patient day", LG)
-    pill(ax, 7.3, 6.0, 3.0, "high alerts 1.8", 45, NAVY); pill(ax, 7.3, 5.5, 3.0, "low alerts 0.54", 14, CYAN); pill(ax, 7.3, 5.0, 3.0, "trend rule highs 4.0", 100, "#9aa6c0")
-    gauge(ax, 8.2, 3.95, 0.5, 52, "high alerts real", NAVY, 10); gauge(ax, 10.2, 3.95, 0.5, 37, "low alerts real", CYAN, 10); gauge(ax, 12.0, 3.95, 0.5, 54, "precise low real", GREEN, 10)
+    pill(ax, 7.3, 6.0, 3.0, "high alerts 1.85", 46, NAVY); pill(ax, 7.3, 5.5, 3.0, "low alerts 0.55", 14, CYAN); pill(ax, 7.3, 5.0, 3.0, "trend rule highs 3.9", 100, "#9aa6c0")
+    gauge(ax, 8.2, 3.95, 0.5, 49, "high alerts real", NAVY, 10); gauge(ax, 10.2, 3.95, 0.5, 35, "low alerts real", CYAN, 10); gauge(ax, 12.0, 3.95, 0.5, 55, "precise low real", GREEN, 10)
     panel(ax, 7.0, 0.5, 6.1, 2.35, "Relevance to India")
     fitpara(ax, 7.2, 2.3, 0.65, 5.7, "Few clinicians serve many patients, and the risk sits between visits. A small team can supervise a large panel, and each clinic sets the sensitive, balanced or precise dial to its own staffing and risk tolerance.", INK, "normal", 14)
     F.append(fig)
@@ -594,7 +594,7 @@ def build():
     # 15 limitations + roadmap
     fig, ax = base(8)
     panel(ax, 0.2, 0.5, 6.4, 6.25, "Limitations, stated plainly", LC)
-    for i, (t_, b_) in enumerate([("Simulator is EHR driven", "fusion gain shows recovery of that link, not proof it exists in real patients"), ("Hypoglycaemia is weaker", "about 6 in 10 low alert episodes are false at balanced; unlogged insulin and meals remain"), ("Not a validated T2D model", "type 1 UVA/Padova ODE with PI controller used as a generic glucose insulin system"), ("Optimistic thresholds", "chosen on pooled held out scores; not tuned to a clinical cost"), ("Associations, not causes", "what if answers are not treatment advice"), ("Simulated inputs", "genotypes, polygenic score, devices; research code, not a medical device")]):
+    for i, (t_, b_) in enumerate([("Simulator is EHR driven", "fusion gain shows recovery of that link, not proof it exists in real patients"), ("Hypoglycaemia is weaker", "about 65% of low alert episodes are false at balanced; unlogged insulin and meals remain"), ("Not a validated T2D model", "type 1 UVA/Padova ODE with PI controller used as a generic glucose insulin system"), ("Optimistic thresholds", "chosen on pooled held out scores; not tuned to a clinical cost"), ("Associations, not causes", "what if answers are not treatment advice"), ("Simulated inputs", "genotypes, polygenic score, devices; research code, not a medical device")]):
         y = 6.2 - i * 0.95
         ax.add_patch(Circle((0.55, y), 0.2, fc=ORANGE, ec="white", zorder=4)); txt(ax, 0.55, y, str(i + 1), 9.5, "white", "bold", "center")
         txt(ax, 0.9, y + 0.14, t_, 11.5, INK, "bold"); fitpara(ax, 0.9, y - 0.12, y - 0.72, 5.5, b_, GREY, "normal", 11.5)

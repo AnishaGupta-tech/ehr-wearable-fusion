@@ -2,7 +2,7 @@
 
 Submission to the Digital Twin Challenge 2026 (Happiest Health, Reimagining and Reforming Healthcare in India Summit 2026).
 
-**Demo video:** [https://youtu.be/LK5-PliAd-Q](https://youtu.be/LK5-PliAd-Q)
+**Demo video:** [https://youtu.be/PoJJRPxAgac](https://youtu.be/PoJJRPxAgac)
 
 ## Team
 
@@ -96,7 +96,7 @@ Glucose forecast error (fused, median): 11.9 mg/dL at 1 hour (persistence 17.4) 
 | Source code | This repository |
 | Architecture diagram (PDF) | [docs/architecture.pdf](docs/architecture.pdf) |
 | Presentation with project details and outcome (PDF) | [docs/TeamTwins.pdf](docs/TeamTwins.pdf) |
-| Demonstration video (unlisted YouTube, about 18 minutes) | [Watch on YouTube](https://youtu.be/LK5-PliAd-Q) |
+| Demonstration video (unlisted YouTube, about 18 minutes) | [Watch on YouTube](https://youtu.be/PoJJRPxAgac) |
 | Open source license | MIT, see [LICENSE](LICENSE) |
 
 Architecture in brief: Synthea EHR, then EHR conditioned physiology and simulated wearables, then ingestion and alignment, then the fused patient timeline, then ablation and event models, then the Patient Twin dashboard.

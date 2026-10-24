@@ -254,7 +254,7 @@ def final_mix(video, out):
     d = dur(video); music = TMP / "music.wav"; make_music(d, music)
     af = ("[1:a]volume=0.55[bg];[0:a]asplit=2[v1][v2];[bg][v2]sidechaincompress=threshold=0.02:ratio=10:attack=40:release=700[ducked];"
           "[v1][ducked]amix=inputs=2:normalize=0:weights=1 1,loudnorm=I=-16:TP=-1.5:LRA=9[a]")
-    run(["ffmpeg", "-y", "-i", str(video), "-i", str(music), "-filter_complex", af, "-map", "0:v", "-map", "[a]", "-c:v", "copy", "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", str(out)])
+    run(["ffmpeg", "-y", "-i", str(video), "-i", str(music), "-filter_complex", af, "-map", "0:v", "-map", "[a]", "-c:v", "copy", "-c:a", "aac", "-ar", "48000", "-ac", "2", "-b:a", "192k", "-movflags", "+faststart", str(out)])
 
 
 def main():

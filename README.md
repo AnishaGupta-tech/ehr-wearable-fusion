@@ -1,69 +1,121 @@
-# EHR × wearable fusion demo (synthetic)
+# Glucose Digital Twin: Fusing Health Records and Wearable Streams to Warn of Glucose Events Two Hours Ahead
 
-## Summary (for reviewers)
+Submission to the Digital Twin Challenge 2026 (Happiest Health, Reimagining and Reforming Healthcare in India Summit 2026).
 
-**Problem and why India.** India has an estimated 101 million people with diabetes and 136 million with prediabetes (ICMR-INDIAB, 2023), and South Asians develop type 2 diabetes at lower BMI and younger ages than most populations. Most are seen a few times a year, so a dangerous glucose swing between visits is invisible to the clinician. Continuous glucose monitors and smartwatches are spreading but are not linked to the health record, and a doctor cannot read every trace. We ask: **can fusing a patient's record (labs, diagnoses, medicines, genetics) with their wearable streams warn about a high (> 180 mg/dL) or low (< 70) glucose event up to 2 hours ahead, say why, and let a clinician see which patients need attention first?**
+## Team
 
-**What it does (a type 2 diabetes digital twin).**
-* **Fused twin:** 800 synthetic patients (Synthea EHR + simulated labs, medicines, SNPs, polygenic score) → EHR-conditioned simulation of Dexcom-style CGM and Apple-Watch-style streams at native rates → ingestion and alignment to one 5-minute timeline. EHR values are joined only from labs dated *before* each timestamp (leakage test). No real patient data; MIMIC-IV is not used.
-* **Early warning:** LightGBM classifiers give P(glucose > 180) and P(< 70) within 2 h, plus 1 h and 2 h glucose forecasts with an 80% band (conformalised on held-out patients). An alert needs risk above threshold now and 10 min earlier. Three alert sensitivities (sensitive / balanced / precise) let a clinic trade missed events against false alarms.
-* **Doctor interface (Streamlit):** *Triage board* ranks the whole panel by current risk; *Patient view* shows risk, alert flag, forecast bands, a "why flagged" SHAP chart (tagged wearable vs health record) and a what-if panel (toggle a medicine or activity and see the risk move); *Live monitor* streams a patient's data tick by tick, re-scores only with data received so far, and keeps an alert log that marks each alert confirmed or false once 2 h have passed; *Model results* shows every metric below.
-* **Real-time path:** `models/events.py::score_stream` rebuilds features from the received history and scores with the held-out-fold model. A test checks that streamed features and risks equal the batch ones, so there is no look-ahead.
+| | |
+|---|---|
+| Team name | TeamTwins |
+| Team leader | Anisha Gupta, IGDTUW (Indira Gandhi Delhi Technical University for Women) |
+| Team member | Vibhor Sharma, GL Bajaj |
+| Submission folder | TeamTwins_IGDTUW |
 
-**Results (800 patients × 14 days, patient-grouped 5-fold CV, 1.2 M test moments from held-out patients).** An event is glucose out of range for at least 15 minutes (3 readings), the consensus CGM definition, which ignores single-sample sensor spikes. Hypoglycaemia is rare (2.7% of in-range moments), so precision is judged against that base rate.
+## Project title
 
-| Event | Model | AUC | Avg. precision | Alert-episode precision | Events caught | Median warning | Alerts / patient-day |
+Glucose Digital Twin: an EHR and wearable fusion model for early warning of high and low glucose in type 2 diabetes.
+
+## Problem statement and healthcare use case
+
+India has an estimated 101 million people with diabetes and 136 million with prediabetes (ICMR INDIAB, 2023), and South Asians develop type 2 diabetes at lower body mass index and younger ages than most populations. Most patients meet a clinician a few times a year, so a dangerous glucose swing between visits goes unseen. Continuous glucose monitors and smartwatches are spreading but are not linked to the health record, and no doctor can read every trace.
+
+The use case: can fusing a patient's record (labs, diagnoses, medicines, genetics) with their wearable streams warn of a high (above 180 mg/dL) or low (below 70 mg/dL) glucose event up to two hours ahead, explain the reason, and let a clinician see which patients need attention first?
+
+## What the system does
+
+* **Fused twin.** 800 synthetic patients (Synthea EHR plus simulated labs, medicines, SNPs and a polygenic score) drive an EHR conditioned simulation of Dexcom style CGM and Apple Watch style streams at native device rates. Ingestion aligns everything to one 5 minute timeline. EHR values are joined only from labs dated before each timestamp, and a unit test enforces this.
+* **Early warning.** LightGBM classifiers give the probability of glucose above 180 and below 70 within 2 hours, plus 1 hour and 2 hour glucose forecasts with an 80 percent band calibrated by conformal prediction on held out patients. An alert needs risk above threshold now and 10 minutes earlier. Three alert sensitivities (sensitive, balanced, precise) let a clinic trade missed events against false alarms.
+* **Doctor interface (Streamlit).** The triage board ranks the whole panel by current risk. The patient view shows risk, alert status, forecast bands, a SHAP explanation tagged wearable or health record, and a what if panel for medicines and activity. The live monitor streams a patient tick by tick, rescores using only data received so far, and logs each alert as confirmed or false after two hours. The results page shows every metric.
+* **Real time path.** `models/events.py::score_stream` rebuilds features from the received history and scores with the held out fold model. A test confirms streamed features and risks equal the batch ones, so there is no look ahead.
+
+## Technical stack and model details
+
+| Layer | Tools |
+|---|---|
+| Synthetic EHR | Synthea (Apache 2.0, Java 17), custom generators for labs, medications, SNPs and polygenic score |
+| Wearable simulation | simglucose (UVA/Padova ODE) with a PI controller for beta cell secretion, behaviour model for steps, sleep, heart rate and HRV |
+| Ingestion | pandas, pyarrow, 5 minute alignment with gap aware interpolation |
+| Models | LightGBM (classification and L1 forecasting), conformal intervals, SHAP |
+| Evaluation | Patient grouped 5 fold cross validation, paired tests, ablation of wearable only versus fused |
+| Interface | Streamlit |
+| Tests | pytest (leakage, streaming equals batch) |
+
+Task definition: an event is glucose out of range for at least 15 minutes (three consecutive readings), the consensus CGM definition, which ignores single sample sensor spikes. Features include current and lagged glucose, slopes, insulin and carbohydrate on board, the patient's own low and high glucose history over 24 and 72 hours, time since last event, the same hour on previous days, heart rate, steps, sleep and resting heart rate trend, plus EHR features (HbA1c, eGFR, lipids, HOMA IR, 2 year slopes, medication classes, SNP counts). Full schemas and the EHR to physiology mapping are in [CONTRACT.md](CONTRACT.md).
+
+## Data sandbox compliance
+
+All data is synthetic, in line with the DPDP Act and HIPAA constraints in the challenge brief. Synthea supplies demographics, diagnosis dates, anthropometrics and lipids. Fasting insulin, longitudinal labs, medications, genotypes and all device streams are generated by this repository. Genotypes, the polygenic score and devices are simulated. MIMIC IV is not used.
+
+## Results
+
+Setup: 800 patients over 14 days, patient grouped 5 fold cross validation, 1.2 million test moments from held out patients. Hypoglycaemia is rare (2.7 percent of in range moments), so precision is judged against that base rate.
+
+| Event | Model | AUC | Average precision | Alert episode precision | Events caught | Median warning | Alerts per patient day |
 |---|---|---|---|---|---|---|---|
-| > 180 | Trend rule (baseline) | 0.755 | 0.32 | 0.30 | 94.3% | 40 min | 4.0 |
-| > 180 | Wearable-only | 0.938 | 0.69 | 0.52 | 89.3% | 80 min | 1.8 |
-| > 180 | **Fused** | **0.938** | **0.69** | **0.52** | 89.1% | 80 min | 1.8 |
-| < 70 | Trend rule (baseline) | 0.848 | 0.17 | 0.20 | 79.1% | 45 min | 1.1 |
-| < 70 | Wearable-only | 0.959 | 0.50 | 0.36 | 72.7% | 70 min | 0.53 |
-| < 70 | **Fused** | **0.959** | **0.50** | **0.37** | 73.8% | 70 min | 0.54 |
+| Above 180 | Trend rule (baseline) | 0.755 | 0.32 | 0.30 | 94.3% | 40 min | 4.0 |
+| Above 180 | Wearable only | 0.938 | 0.69 | 0.52 | 89.3% | 80 min | 1.8 |
+| Above 180 | **Fused** | **0.938** | **0.69** | **0.52** | 89.1% | 80 min | 1.8 |
+| Below 70 | Trend rule (baseline) | 0.848 | 0.17 | 0.20 | 79.1% | 45 min | 1.1 |
+| Below 70 | Wearable only | 0.959 | 0.50 | 0.36 | 72.7% | 70 min | 0.53 |
+| Below 70 | **Fused** | **0.959** | **0.50** | **0.37** | 73.8% | 70 min | 0.54 |
 
-*Model update:* the classifiers are regularised and add high-glucose history features (counterparts of the low-glucose ones). Against the previous model on the same 800-patient data, high-glucose average precision rose from 0.687 to 0.693 (fused), alert-episode precision from 0.51 to 0.52, low-glucose events caught at the balanced setting from 69% to 74%, and forecast error fell slightly (60 min 11.9 → 11.8, 120 min 16.2 → 16.0); low-glucose AP and AUC were unchanged. Gains are larger on small cohorts (sample profile: fused high-glucose AP 0.53 → 0.56), where the per-patient EHR columns otherwise let trees memorise training patients.
-
-("Balanced" alert setting. "Alert-episode precision" = share of alert episodes followed by an event within 2 h; "events caught" = an alert fired in the 2 h before glucose first left range after an hour in range.) For low glucose, average precision is 18 times the base rate, and richer physiology features (insulin and carbohydrate on board, smoothed trend and slope, the patient's own low-glucose history over the last 24 and 72 h, time since last low, the same hour on previous days) lifted it from 0.32 to 0.47 on the same labels (0.50 with the current model).
+Alert episode precision is the share of alert episodes followed by an event within 2 hours. Events caught means an alert fired in the 2 hours before glucose first left range after an hour in range. For low glucose, average precision is 18 times the base rate.
 
 Alert sensitivity for the fused model:
 
-| Event | Setting | Events caught | Alert-episode precision | Row-level precision | Alerts / patient-day |
+| Event | Setting | Events caught | Alert episode precision | Row level precision | Alerts per patient day |
 |---|---|---|---|---|---|
-| > 180 | sensitive | 96.7% | 0.35 | 0.48 | 2.2 |
-| > 180 | balanced | 89.1% | 0.52 | 0.63 | 1.8 |
-| > 180 | precise | 88.7% | 0.53 | 0.63 | 1.7 |
-| < 70 | sensitive | 95.9% | 0.14 | 0.24 | 1.3 |
-| < 70 | balanced | 73.8% | 0.37 | 0.49 | 0.54 |
-| < 70 | precise | 54.7% | 0.54 | 0.65 | 0.28 |
+| Above 180 | sensitive | 96.7% | 0.35 | 0.48 | 2.2 |
+| Above 180 | balanced | 89.1% | 0.52 | 0.63 | 1.8 |
+| Above 180 | precise | 88.7% | 0.53 | 0.63 | 1.7 |
+| Below 70 | sensitive | 95.9% | 0.14 | 0.24 | 1.3 |
+| Below 70 | balanced | 73.8% | 0.37 | 0.49 | 0.54 |
+| Below 70 | precise | 54.7% | 0.54 | 0.65 | 0.28 |
 
-Glucose forecast error (fused, median): 11.8 mg/dL at +1 h (persistence 17.4) and 16.0 at +2 h (persistence 26.6); the 80% band covers 80% of held-out outcomes.
+Glucose forecast error (fused, median): 11.8 mg/dL at 1 hour (persistence 17.4) and 16.0 at 2 hours (persistence 26.6). The 80 percent band covers 80 percent of held out outcomes.
 
-**Does the health record help?** Once a patient has a day of CGM, no: the personal-history features carry what the record knew, and the fused and wearable-only models now score the same overall. In the first 24 hours, before that history exists, the record helps for high glucose (AUC 0.921 vs 0.912, average precision 0.64 vs 0.62) and does not for low glucose (0.39 vs 0.42, within noise). Against a wearable model without personal-history features, the record lowers 60-minute glucose error from 13.5 to 12.8 mg/dL (`models/ablation.py`). So the record's value here is a day-one prior, and the simulator's EHR-to-physiology link is what it recovers.
+**Does the health record help?** Once a patient has a day of CGM, no: personal history features carry what the record knew, so fused and wearable only models score the same overall. In the first 24 hours, before that history exists, the record helps for high glucose (AUC 0.921 against 0.912, average precision 0.64 against 0.62) and not for low glucose (within noise). Against a wearable model without personal history features, the record lowers 60 minute glucose error from 13.5 to 12.8 mg/dL (`models/ablation.py`). The record's value here is a day one prior.
 
-**Impact.** With the balanced setting a monitored patient triggers about 2.3 alerts a day (1.8 high, 0.5 low), of which about 5 in 10 (high) and 4 in 10 (low) are followed by a real event. That is too many to send to a doctor, so the design is tiered: the patient is alerted first, and the **Triage board** shows the clinician only who is in alert at the moment, so a small team can supervise a large panel between visits. A clinic that wants fewer interruptions picks the precise setting (0.28 low-glucose alerts a day, 54% of them real, at the cost of missing about 45% of low events).
+**Impact.** At the balanced setting a monitored patient triggers about 2.3 alerts a day (1.8 high, 0.5 low), and roughly 5 in 10 high alerts and 4 in 10 low alerts are followed by a real event. That is too many for a doctor, so the design is tiered: the patient is alerted first, and the triage board shows the clinician only who is in alert now, letting a small team supervise a large panel between visits. A clinic wanting fewer interruptions chooses the precise setting (0.28 low glucose alerts a day, 54 percent real, at the cost of missing about 45 percent of low events).
 
-**Limitations.**
+## Limitations
+
 * The simulator is driven by the EHR, so the fusion gain shows the pipeline can recover that link, not that it exists in real patients. Validation on real, consented data is the necessary next step.
-* Hypoglycaemia is the weaker result: about 6 in 10 low-glucose alert episodes are false at the balanced setting, and the precise setting misses about 45% of the events. Model tuning (depth, regularisation, more training rows, shorter horizons) did not move it; what is left looks like unlogged insulin and meals, which no feature can recover.
-* Thresholds are chosen on pooled held-out scores, so they are mildly optimistic, and they are not tuned to a clinical cost of missed versus false alarms.
-* What-if answers come from associations the model learned on synthetic data; they are not causal treatment advice.
-* The live monitor replays simulated streams; connecting a real device feed needs only an adapter that appends rows to the timeline.
-* Genotypes, polygenic score and devices are simulated. This is research code, not a medical device.
+* Hypoglycaemia is the weaker result: about 6 in 10 low glucose alert episodes are false at the balanced setting. What remains looks like unlogged insulin and meals, which no feature can recover.
+* Thresholds are chosen on pooled held out scores, so they are mildly optimistic, and they are not tuned to a clinical cost of missed versus false alarms.
+* What if answers come from associations learned on synthetic data and are not causal treatment advice.
+* The live monitor replays simulated streams. A real device feed needs only an adapter that appends rows to the timeline.
+* This is research code, not a medical device.
 
-Synthea EHR → EHR-conditioned simulated wearables (simglucose CGM + multi-device streams) → ingestion & alignment → fused patient timeline → ablation → Patient Twin dashboard.
-All data is synthetic; genotypes, polygenic score and devices are **SIMULATED**. See [CONTRACT.md](CONTRACT.md) for schemas, the physiology linkage and the architecture diagram.
+## Deliverables
+
+| Item | Location |
+|---|---|
+| Source code | This repository |
+| Architecture diagram (PDF) | [docs/architecture.pdf](docs/architecture.pdf) |
+| Presentation with project details and outcome (PDF) | [docs/TeamTwins.pdf](docs/TeamTwins.pdf) |
+| Demonstration video (20 minutes or longer, unlisted YouTube) | TODO: add link |
+| Open source license | MIT, see [LICENSE](LICENSE) |
+
+Architecture in brief: Synthea EHR, then EHR conditioned physiology and simulated wearables, then ingestion and alignment, then the fused patient timeline, then ablation and event models, then the Patient Twin dashboard.
+
+## Open source license
+
+Released under the MIT License ([LICENSE](LICENSE)). Synthea is Apache 2.0, and other dependencies keep their own licenses.
+
+## Run it
 
 ```bash
 uv venv --python 3.12 .venv && uv pip install -p .venv/bin/python -r requirements.txt
-brew install openjdk@17 libomp                                   # Synthea needs Java 17; LightGBM needs libomp (macOS)
+brew install openjdk@17 libomp
 export PYTHONPATH=. PATH=/opt/homebrew/opt/openjdk@17/bin:$PATH
 
-python run_pipeline.py --profile sample          # 50 patients x 7 days, a few minutes
-python run_pipeline.py --profile full            # 800 patients x 14 days, ~1 hour on 10 cores
-streamlit run dashboard/app.py                   # Patient Twin / Cohort / Results
-pytest tests                                     # run on the sample profile first
+python run_pipeline.py --profile sample
+python run_pipeline.py --profile full
+streamlit run dashboard/app.py
+pytest tests
 ```
 
-Stages can be run separately: `--stages synthea,ehr,wearables,ingest,models,events` (`events` = adverse-event model, ~10 min on `full`).
+The sample profile (50 patients, 7 days) takes a few minutes. The full profile (800 patients, 14 days) takes about an hour on 10 cores. Stages can run separately with `--stages synthea,ehr,wearables,ingest,models,events`.
 
-Layout: `ehr/` (EHR tables) · `wearables/` (param derivation + simulators) · `ingestion/` (raw → timeline → fused) · `features.py` · `models/ablation.py` · `models/events.py` (adverse-event alerts) · `dashboard/app.py` · `tests/`.
+Layout: `ehr/` (EHR tables), `wearables/` (parameter derivation and simulators), `ingestion/` (raw streams to timeline to fused), `features.py`, `models/ablation.py`, `models/events.py` (adverse event alerts), `dashboard/app.py`, `docs/`, `tests/`.
